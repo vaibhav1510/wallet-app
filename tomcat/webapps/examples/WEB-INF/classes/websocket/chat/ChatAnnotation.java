@@ -41,7 +41,7 @@ public class ChatAnnotation {
     private static final String GUEST_PREFIX = "Guest";
     private static final AtomicInteger connectionIds = new AtomicInteger(0);
     private static final Set<ChatAnnotation> connections =
-            new CopyOnWriteArraySet<ChatAnnotation>();
+            new CopyOnWriteArraySet<>();
 
     private final String nickname;
     private Session session;

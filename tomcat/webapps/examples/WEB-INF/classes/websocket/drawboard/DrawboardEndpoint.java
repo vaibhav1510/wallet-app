@@ -208,17 +208,17 @@ public final class DrawboardEndpoint extends Endpoint {
 
                                 break;
                             }
-
-                        } catch (RuntimeException ex) {
+                        } catch (ParseException e) {
+                            // Client sent invalid data
+                            // Ignore, TODO: maybe close connection
+                        } catch (RuntimeException e) {
                             // Client sent invalid data.
                             // Ignore, TODO: maybe close connection
                             if (dontSwallowException) {
-                                throw ex;
+                                throw e;
                             }
-                        } catch (ParseException ex) {
-                            // Client sent invalid data.
-                            // Ignore, TODO: maybe close connection
                         }
+
                     } catch (RuntimeException ex) {
                         log.error("Unexpected exception: " + ex.toString(), ex);
                     }

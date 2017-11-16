@@ -43,8 +43,8 @@ public class ChatServlet
 
     private static final String CHARSET = "UTF-8";
 
-    protected ArrayList<HttpServletResponse> connections =
-        new ArrayList<HttpServletResponse>();
+    protected final ArrayList<HttpServletResponse> connections =
+            new ArrayList<>();
     protected transient MessageSender messageSender = null;
 
     @Override
@@ -193,7 +193,7 @@ public class ChatServlet
     public class MessageSender implements Runnable {
 
         protected boolean running = true;
-        protected ArrayList<String> messages = new ArrayList<String>();
+        protected final ArrayList<String> messages = new ArrayList<>();
 
         public MessageSender() {
             // Default contructor
@@ -225,7 +225,7 @@ public class ChatServlet
                 String[] pendingMessages;
                 synchronized (messages) {
                     try {
-                        if (messages.size() == 0) {
+                        if (running && messages.size() == 0) {
                             messages.wait();
                         }
                     } catch (InterruptedException e) {

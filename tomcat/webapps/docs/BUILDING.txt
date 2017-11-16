@@ -16,11 +16,11 @@
 ================================================================================
 
             ====================================================
-            Building The Apache Tomcat 7.0 Servlet/JSP Container
+            Building The Apache Tomcat 8.0 Servlet/JSP Container
             ====================================================
 
-This subproject contains the source code for Tomcat 7.0, a container that
-implements the Servlet 3.0, JSP 2.2, EL 2.2 and WebSocket 1.1 specifications
+This subproject contains the source code for Tomcat 8.0, a container that
+implements the Servlet 3.1, JSP 2.3, EL 3.0 and WebSocket 1.1 specifications
 from the Java Community Process <http://www.jcp.org/>.
 
 Note: If you just need to run Apache Tomcat, it is not necessary to build
@@ -31,60 +31,43 @@ In order to build a binary distribution version of Apache Tomcat from a
 source distribution, do the following:
 
 
-(1) Download and Install a Java 6 and Java 7 Development Kit
+(1) Download and Install a Java Development Kit
 
- 1. If the JDKs are already installed, skip to (2).
+ 1. If the JDK is already installed, skip to (2).
 
- 2. Download a version 6 of the Java Development Kit (JDK) release (use the
-    latest update available for your chosen version) from
+ 2. Download a version 7 of Java Development Kit (JDK) release (use the
+    latest update available for your chosen version) from one of:
 
         http://www.oracle.com/technetwork/java/javase/downloads/index.html
-        or from another JDK vendor.
+        http://openjdk.java.net/install/index.html
+        or another JDK vendor.
 
     Note regarding later versions of Java:
 
-      As documented elsewhere, one of the components in Apache Tomcat includes
-      a private copy of the Apache Commons DBCP library. The source code
-      for this library is downloaded, processed by the build script
-      (renaming the packages) and compiled.
+      As documented elsewhere, one of components in Apache Tomcat includes
+      a private copy of the Apache Commons DBCP library.
 
-      Due to changes in JDBC interfaces implemented by the library between
-      versions of Java SE specification, the library has to target specific
-      version of Java and can be compiled only with the JDK version
-      implementing this version of specification. Therefore, the build Tomcat
-      build process must be executed with a Java 6 JDK.
+      The JDBC interfaces implemented by DBCP frequently change in non-backwards
+      compatible ways between versions of the Java SE specification. Therefore,
+      it is likely that DBCP will only compile with the specific version of Java
+      listed above and that compilation will fail if a later version of Java is
+      used.
 
       See Apache Commons DBCP project web site for more details on
       available versions of the library and its requirements,
 
         http://commons.apache.org/dbcp/
 
-      If you really want to use a later version of JDK to build Tomcat,
-      several workarounds are possible. One of them is to skip building
-      the component (tomcat-dbcp.jar).
-
- 3. Install the Java 6 JDK according to the instructions included with the
-    release.
+ 3. Install the JDK according to the instructions included with the release.
 
  4. Set an environment variable JAVA_HOME to the pathname of the directory
     into which you installed the JDK release.
 
- 5. Download a version 7 of the Java Development Kit (JDK) release (use the
-    latest update available for your chosen version) from
 
-        http://www.oracle.com/technetwork/java/javase/downloads/index.html
-        or from another JDK vendor.
+(2) Install Apache Ant version 1.9.5 or later on your computer.
 
- 6. Install the Java 7 JDK according to the instructions included with the
-    release.
-
-* NOTE: The Java 7 JDK is only required if you wish to build Tomcat with
-  JSR-356 (Java WebSocket 1.0) support.
-
-
-(2) Install Apache Ant version 1.8.2 or later on your computer
-
- 1. If Apache Ant version 1.8.2 or later is already installed on your computer, skip to (3).
+ 1. If Apache Ant version 1.9.5 or later is already installed on your computer,
+    skip to (3).
 
  2. Download a binary distribution of Ant from:
 
@@ -106,9 +89,9 @@ source distribution, do the following:
     available, which will be used to actually perform the build.
 
 
-(3) Building Tomcat 7.0
+(3) Building Tomcat 8.0
 
-(3.1) Checkout or obtain the source code for Tomcat 7.0
+(3.1) Checkout or obtain the source code for Tomcat 8.0
 
 Checkout the source using SVN, selecting a tag for released version or
 trunk for the current development code, or download and unpack a source
@@ -116,11 +99,11 @@ package.
 
  *  Tomcat SVN repository URL:
 
-        http://svn.apache.org/repos/asf/tomcat/tc7.0.x/trunk/
+        http://svn.apache.org/repos/asf/tomcat/tc8.0.x/trunk/
 
  *  Source packages can be downloaded from:
 
-        http://tomcat.apache.org/download-70.cgi
+        http://tomcat.apache.org/download-80.cgi
 
 The location where the source has been placed will be further referred as
 ${tomcat.source}.
@@ -147,14 +130,9 @@ ${tomcat.source}.
     directory outside of the source tree, so that you do not waste your
     time re-downloading the libraries.
 
-* WARNING: The default value of base.path property makes the build script
-  to download libraries required to build Tomcat to the /usr/share/java
-  directory. On a typical Linux or MacOX system an ordinary user will not
-  have access to write to this directory. Even if you do have access to
-  that directory, it is likely not appropriate for you to write there.
-
-  On Windows this usually corresponds to the "C:\usr\share\java"
-  directory, unless Cygwin is used.
+* NOTE: The default value of the base.path property configures the build script
+  to download the libraries required to build Tomcat to the
+  ${user.home}/tomcat-build-libs directory.
 
 * NOTE: Users accessing the Internet through a proxy must use the properties
   file to indicate to Ant the proxy configuration.
@@ -162,17 +140,13 @@ ${tomcat.source}.
   The following properties should be added to the ${tomcat.source}/build.properties
   file.
 
-        proxy.use=on
+        proxy.use=true
         proxy.host=proxy.domain
         proxy.port=8080
         proxy.user=username
         proxy.password=password
 
   See Apache Ant documentation for the <setproxy> task for details.
-
-* NOTE: Users wishing to build Tomcat with JSR-356 (Java WebSocket 1.0) support
-  must also set the java.7.home build property to the location of the Java 7 JDK
-  installation.
 
  3. Go to the sources directory and run Ant:
 
@@ -197,7 +171,7 @@ ${tomcat.source}.
 
 (4) Updating sources and rebuilding
 
-It is recommended that you regularly update the downloaded Tomcat 7.0
+It is recommended that you regularly update the downloaded Tomcat 8.0
 sources using your SVN client.
 
 For a quick rebuild of only modified code you can use:
@@ -267,7 +241,7 @@ You can build them by using the following commands:
 
     A full release includes the Windows installer which requires a Windows
     environment to be available to create it. If not building in a Windows
-    environment, the build scripts assume that WINE is available. If this is not
+    environment, the build scripts assume that Wine is available. If this is not
     the case, the skip.installer property may be set to skip the creation of the
     Windows installer.
 
@@ -288,7 +262,14 @@ You can build them by using the following commands:
     You will be prompted for the GPG passphrase when the release build
     starts, unless "gpg.passphrase" property is set.
 
- 2. Build the release:
+ 2. If building the Windows installer
+
+    If running the build in a UAC enabled environment, building the Windows
+    installer requires elevated privileges. The simplest way to do this is to
+    open the command prompt used for the build with the "Run as administrator"
+    option.
+
+ 3. Build the release:
 
     cd ${tomcat.source}
     ant release
@@ -314,17 +295,17 @@ directory:
 
     output/build/logs
 
-
-By default the testsuite is run three times to test 3 different
-implementations of Tomcat connectors: BIO, NIO and APR. (If you are not
+By default the testsuite is run four times to test 4 different
+implementations of Tomcat connectors: BIO, NIO, NIO2 and APR. (If you are not
 familiar with Tomcat connectors, see config/http.html in documentation for
 details).
 
-The 3 runs are enabled and disabled individually by the following
+The 4 runs are enabled and disabled individually by the following
 properties, which all are "true" by default:
 
     execute.test.bio=true
     execute.test.nio=true
+    execute.test.nio2=true
     execute.test.apr=true
 
 The APR connector can be tested only if Tomcat-Native library binaries are
@@ -339,11 +320,11 @@ If you are on Windows and want to test the APR connector you can put the
 tcnative-1.dll file into ${tomcat.source}/bin/native/ and it will be copied
 into the above directory when the build runs.
 
-* NOTE: If you configured the build to use a Java 7 JDK (if the
-"java.7.home" property has been defined) the tests will be run with Java 7.
-
-The version of Java that was actually used to run the tests is reported by
-"org.apache.catalina.util.TestServerInfo" test class.
+The unit tests include tests of the clustering functionality which require
+multicast to be enabled. There is a simple application provided in the Tomcat
+test source (org.apache.catalina.tribes.TesterMulticast) that can be used to
+check if a machine supports multicast. Notes on enabling multicast for different
+operating systems are provided in the Javadoc for that class.
 
 
 (7.2) Running a single test
@@ -358,8 +339,7 @@ For example:
 
 It is possible to further limit such run to a number of selected test
 methods by adding "test.entry.methods" property. The property specifies a
-comma-separated list of test case methods. (This feature requires
-Apache Ant 1.8.2 or later).
+comma-separated list of test case methods.
 
 For example:
 
@@ -367,7 +347,24 @@ For example:
     test.entry.methods=testMultiply01,testMultiply02
 
 
-(7.3) Other configuration options
+(7.3) Running a set of tests
+
+It is possible to run a set of JUnit test classes by adding the "test.name"
+property to the build.properties file. The property specifies an Ant
+includes pattern for the fileset of test class files to run.
+
+The default value is "**/Test*.java", so all test classes are being
+executed (with few exceptions - see build.xml for several exclude patterns).
+
+You can include multiple patterns by concatenating them with a comma (",")
+as the separator.
+
+For example:
+
+    test.name=**/TestSsl.java,**/TestWebSocketFrameClientSSL.java
+
+
+(7.4) Other configuration options
 
  1. It is possible to configure the directory where JUnit reports are
  written to. It is configured by "test.reports" property. The default
@@ -416,6 +413,37 @@ For example:
   Apache License v1.1. See http://cobertura.sf.net for details. Using it
   during Tomcat build is optional and is off by default.
 
+ 6. The performance tests are written to run reasonably powerful machines (such
+    as a developer may use day to day) assuming no other resource hungry
+    processes are running. These assumptions are not always true (e.g. on CI
+    systems running ina virtual machine) so the performance tests may be
+    disabled by using the following property:
+
+        test.excludePerformance=true
+
+ 7. Some tests include checks that the access log valve entries are as expected.
+    These checks include timings. On slower / loaded systems these checks will
+    often fail. The checks may be relaxed by using the following property:
+
+        test.relaxTiming=true
+
+ 8. It is known that some platforms (e.g. OSX El Capitan) require IPv4 to
+    be the default for the multicast tests to work. This is configured by
+    the following property:
+
+        java.net.preferIPv4Stack=true
+
+ 9. Optional support is provided for FindBugs. It can be enabled using the
+    following property:
+
+        execute.findbugs=true
+
+    The report file by default is written to
+
+        output/findbugs
+
+* NOTE: Findbugs is licensed under LGPL. Using Findbugs during Tomcat build is
+  optional and is off by default.
 
 (8) Source code checks
 

@@ -24,7 +24,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import util.CookieFilter;
 import util.HTMLFilter;
 
 /**
@@ -55,10 +57,12 @@ public class CookieExample extends HttpServlet {
         }
 
         response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
 
         PrintWriter out = response.getWriter();
-        out.println("<html>");
+        out.println("<!DOCTYPE html><html>");
         out.println("<head>");
+        out.println("<meta charset=\"UTF-8\" />");
 
         String title = RB.getString("cookies.title");
         out.println("<title>" + title + "</title>");
@@ -82,13 +86,19 @@ public class CookieExample extends HttpServlet {
 
         Cookie[] cookies = request.getCookies();
         if ((cookies != null) && (cookies.length > 0)) {
+            HttpSession session = request.getSession(false);
+            String sessionId = null;
+            if (session != null) {
+                sessionId = session.getId();
+            }
             out.println(RB.getString("cookies.cookies") + "<br>");
             for (int i = 0; i < cookies.length; i++) {
                 Cookie cookie = cookies[i];
-                out.print("Cookie Name: " + HTMLFilter.filter(cookie.getName())
-                          + "<br>");
+                String cName = cookie.getName();
+                String cValue = cookie.getValue();
+                out.print("Cookie Name: " + HTMLFilter.filter(cName) + "<br>");
                 out.println("  Cookie Value: "
-                            + HTMLFilter.filter(cookie.getValue())
+                            + HTMLFilter.filter(CookieFilter.filter(cName, cValue, sessionId))
                             + "<br><br>");
             }
         } else {

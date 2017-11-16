@@ -32,7 +32,7 @@ public class ExamplesConfig implements ServerApplicationConfig {
     public Set<ServerEndpointConfig> getEndpointConfigs(
             Set<Class<? extends Endpoint>> scanned) {
 
-        Set<ServerEndpointConfig> result = new HashSet<ServerEndpointConfig>();
+        Set<ServerEndpointConfig> result = new HashSet<>();
 
         if (scanned.contains(EchoEndpoint.class)) {
             result.add(ServerEndpointConfig.Builder.create(
@@ -55,7 +55,7 @@ public class ExamplesConfig implements ServerApplicationConfig {
         // Deploy all WebSocket endpoints defined by annotations in the examples
         // web application. Filter out all others to avoid issues when running
         // tests on Gump
-        Set<Class<?>> results = new HashSet<Class<?>>();
+        Set<Class<?>> results = new HashSet<>();
         for (Class<?> clazz : scanned) {
             if (clazz.getPackage().getName().startsWith("websocket.")) {
                 results.add(clazz);

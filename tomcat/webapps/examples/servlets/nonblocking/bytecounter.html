@@ -14,20 +14,19 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
-<head>
-    <meta http-equiv=Content-Type content="text/html">
-    <title>Apache Tomcat Deprecated WebSocket Examples</title>
-</head>
-<body>
-<h3>Apache Tomcat Deprecated WebSocket Examples</h3>
-<ul>
-    <li><a href="echo.html">Echo example</a></li>
-    <li><a href="chat.html">Chat example</a></li>
-    <li><a href="snake.html">Multiplayer snake example</a></li>
-</ul>
-<p>This API has been deprecated. The examples are also available using the JSR
-   356 <a href="../websocket/index.xhtml">Java WebSocket 1.1 API</a>.</p> 
-</body>
+  <head>
+    <title>Servlet 3.1 non-blocking IO examples: Byte counter</title>
+  </head>
+  <body>
+    <h1>Byte counter</h1>
+    <p>Select a file and/or enter some data using the form below and then submit
+       it. The server will read the request body using non-blocking IO and then
+       respond with the total length of the request body in bytes.</p>
+    <form method="POST" enctype="multipart/form-data" action="bytecounter" >
+      <p><textarea name="data" rows="5" cols="60" ></textarea></p>
+      <p><input name="source" type="file" /></p>
+      <p><input type="submit" value="Submit" /></p>
+    </form>
+  </body>
 </html>
