@@ -4,17 +4,17 @@ I built this login form to block the front end of most of my freelance wordpress
 
 This is just the HTML / CSS of it but it uses wordpress's login system. 
 
-Nice and Simple
+Nice and Simple*/
 
 
- <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
- 
-function genOrderSummary( encryptedUserName, encryptedPassword) {
+
+ // <script type="text/javascript"></script>
+function genOrderSummary( email, Password) {
 
     $(this).ajaxhandler({
-        url: "/pages/" + _cb_hp_token + "/checkout",
-        type: "GET",
-        data: {email_id: encryptedUserName, password: encryptedPassword},
+        url: "/app/signup",
+        type: "POST",
+        data: {email_id: email, Password: password},
         success: function(responseJson, statusText, xhr, $form) {
         	
         	  //var arr =JSON.parse(response.xhr.responseText);
@@ -39,16 +39,16 @@ function genOrderSummary( encryptedUserName, encryptedPassword) {
     });
 }
 
-require(['index'], function(Syssyn) {
+
   	 $('#Submit-Login').click(function() {
 
   		var email = $("#Email-Id").val();
   		var password = $("#Login-Password").val();
   		
-  		var encryptedEmail = CryptoJS.AES.encrypt(email, "My Secret Passphrase");
-  		var encryptedPassword = CryptoJS.AES.encrypt(password, "My Secret Passphrase");
+  		//var encryptedEmail = CryptoJS.AES.encrypt(email, "My Secret Passphrase");
+  		//var encryptedPassword = CryptoJS.AES.encrypt(password, "My Secret Passphrase");
   		
-  		genOrderSummary(encryptedUserName, encryptedPassword);
+  		genOrderSummary(email, password);
   		
   		
   		///// Decryption code //////
@@ -67,7 +67,7 @@ require(['index'], function(Syssyn) {
   		var yyy = PreProcessorWorkerSvc.getProjectDetails152(Initprojectinfo, callbackStudies); // Invoke the PreProcessorWorker service 
   	}); */
   	
-  //	});
+  	});
       
 
-   // });  */
+   
