@@ -7,6 +7,9 @@ import java.util.zip.GZIPInputStream;
 
 import org.apache.commons.codec.binary.Base64;
 import org.json.*;
+
+import com.google.gdata.util.common.base.CharEscapers;
+
 import java.util.HashMap;
 import java.util.Map;
 import static javax.servlet.http.HttpServletResponse.*;
@@ -109,7 +112,7 @@ public class HttpUtil{
     }
     
     public Response get(String url, Params params, Map<String, String> extraHeaders, boolean throwIfEmptyResponse) throws IOException {
-        String queryStr = params == null ? null : JspUtils.toQueryStr(params.map());
+        String queryStr = params == null ? null : toQueryStr(params.map());
         if(queryStr != null &&  ! queryStr.isEmpty()){
             url = url + '?' + queryStr;
         }
@@ -123,7 +126,7 @@ public class HttpUtil{
     }
 
     public Response delete(String url, Params params, Map<String, String> extraHeaders) throws IOException {
-        String queryStr = params == null ? null : JspUtils.toQueryStr(params.map());
+        String queryStr = params == null ? null : toQueryStr(params.map());
         if(queryStr != null &&  ! queryStr.isEmpty()){
             url = url + '?' + queryStr;
         }
@@ -148,7 +151,7 @@ public class HttpUtil{
     }
     
     public Response post(String url, Params params, Map<String, String> extraHeaders, boolean throwIfEmptyResp) throws IOException {
-        return post(url, params == null ? null : JspUtils.toQueryStr(params.map()), extraHeaders, throwIfEmptyResp);
+        return post(url, params == null ? null : toQueryStr(params.map()), extraHeaders, throwIfEmptyResp);
     }
     
     public Response post(String url, String content) throws IOException {
@@ -164,7 +167,7 @@ public class HttpUtil{
     }
       
     public Response put(String url, Params params, Map<String,String> extraHeaders) throws IOException {
-        return put(url, JspUtils.toQueryStr(params.map()), extraHeaders);
+        return put(url, toQueryStr(params.map()), extraHeaders);
     }
     
     public Response put(String url, String content) throws IOException {
@@ -316,5 +319,17 @@ public class HttpUtil{
         }
     }
     
+    public static String toQueryStr(Map<String, String> map){
+        StringJoiner buf = new StringJoiner("&");
+        for(Map.Entry<String, String> entry : map.entrySet()){
+            String keyValPair = escQuery(entry.getKey()) + "=" + escQuery(entry.getValue());
+            buf.add(keyValPair);
+        }
+        return buf.toString();
+    }
+
+    public static String escQuery(String queryComp){
+        return CharEscapers.uriQueryStringEscaper().escape(queryComp);
+    }
 
 }
