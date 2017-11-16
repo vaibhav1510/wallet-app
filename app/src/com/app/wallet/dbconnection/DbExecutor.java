@@ -42,7 +42,7 @@ public class DbExecutor {
 	}
 	
 	public JsonElem createJsonElem(ResultSet rs, String[] cols) throws Exception{
-		JSONObject json = new JSONObject();				
+		JSONObject json = new JSONObject();		
 		while(rs.next()){
 			for(String key:cols) {
 				json.put(key, rs.getObject(key).toString());	
