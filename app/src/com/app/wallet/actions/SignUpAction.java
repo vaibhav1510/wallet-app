@@ -29,11 +29,15 @@ public class SignUpAction extends HttpServlet {
 			UserValidator validator = new UserValidator(email, password);
 			JSONObject resp = new JSONObject();
 			resp.put("email", email);
-			if(validator.isValid()) {
-				resp.put("message", "Login successfully");		
-			} else {
+			Boolean isValid = validator.isValid();
+			if(isValid == null) {
 				validator.createNewUser();
-				resp.put("message", "Signed Up successfully");				
+				resp.put("message", "Signed Up successfully");
+				resp.put("client_token", validator.clientToken());				
+			}else if(isValid) {
+				resp.put("message", "Login successfully");
+			} else {
+				resp.put("error", "Email or Password is wrong. Please try again");
 			}
 			response.sendRedirect(resp.toString());
 		}catch (Exception e) {			
