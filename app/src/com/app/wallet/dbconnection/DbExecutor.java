@@ -27,6 +27,7 @@ public class DbExecutor {
 	}
 	
 	public int  update(String sql) throws Exception {
+		System.out.println("LOG >>> " +sql);
 		Statement stmt  = conn.createStatement();				
 		int count = stmt.executeUpdate(sql);
 		stmt.close();
@@ -34,6 +35,7 @@ public class DbExecutor {
 	}
 	
 	public JsonElem select(String sql, String[] cols) throws Exception {
+		System.out.println("LOG >>> " +sql);
 		Statement stmt  = conn.createStatement();		
 		ResultSet rs = stmt.executeQuery(sql);		
 		JsonElem ele= createJsonElem(rs, cols);

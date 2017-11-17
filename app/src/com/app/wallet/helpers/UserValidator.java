@@ -36,9 +36,10 @@ public class UserValidator {
 
 	public boolean createNewUser() throws Exception {
 		Password password = AESEncryption.inst.encypt(passwd);
-		String sql = new StringBuilder().append("insert into users values ('','").append(email).append("','")
-				.append(password.encPasswd).append("','").append(password.secretKey).append("'").toString();
-
+		String sql = new StringBuilder()
+		.append("insert into users set email='").append(email).append("', password='")
+				.append(password.encPasswd).append("', sec_key='").append(password.secretKey).append("'").toString();
+		this.clientToken = password.secretKey;
 		DbExecutor exec = DbExecutor.init();
 		return exec.update(sql) > 1;
 	}
