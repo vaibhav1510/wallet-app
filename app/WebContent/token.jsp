@@ -28,14 +28,20 @@ outputHtml.append("<title>Merchant Check Out Page</title>");
 outputHtml.append("</head>");
 outputHtml.append("<body>");
 outputHtml.append("<center><h1>Please do not refresh this page...</h1></center>");
-outputHtml.append("<form method='post' action='"+ PaytmConstants.PAYTM_URL +"' name='f1'>");
+outputHtml.append("<form method='post' action='https://accounts-uat.paytm.com/signin/otp' name='f1'>");
 outputHtml.append("<table border='1'>");
 outputHtml.append("<tbody>");
 for(Map.Entry<String,String> entry : parameters.entrySet()) {
 	String key = entry.getKey();
 	String value = entry.getValue();
 	outputHtml.append("<input type='hidden' name='"+key+"' value='" +value+"'>");	
-}	  
+}	
+
+outputHtml.append("<input type='hidden' name='email' value='test@test.com'>");
+outputHtml.append("<input type='hidden' name='phone' value='7777777777'>");
+outputHtml.append("<input type='hidden' name='scope' value='wallet'>");
+outputHtml.append("<input type='hidden' name='responseType' value='token'>");
+outputHtml.append("<input type='hidden' name='clientId' value='P76gLhmYClUeof3n'>");
 	  
 outputHtml.append("<input type='hidden' name='CHECKSUMHASH' value='"+checkSum+"'>");
 outputHtml.append("</tbody>");

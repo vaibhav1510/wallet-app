@@ -9,8 +9,6 @@
 <body>
 
 <form action="/app/signup">
-
-
 </form>
 </body>
 </html>

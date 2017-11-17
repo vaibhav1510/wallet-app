@@ -26,10 +26,11 @@ public class DbExecutor {
 		conn.close();
 	}
 	
-	public void update(String sql) throws Exception {
+	public int  update(String sql) throws Exception {
 		Statement stmt  = conn.createStatement();				
-		stmt.executeUpdate(sql);
+		int count = stmt.executeUpdate(sql);
 		stmt.close();
+		return count;
 	}
 	
 	public JsonElem select(String sql, String[] cols) throws Exception {
