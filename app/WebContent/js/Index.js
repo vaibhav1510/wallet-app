@@ -11,7 +11,7 @@ var gToken;
 
 function ReadInputData()
 {
-	alert("ReadInputData");
+	//alert("ReadInputData");
 	var parameters = location.search.substring(1).split("&");
 
 	var temp = parameters[0].split("=");
