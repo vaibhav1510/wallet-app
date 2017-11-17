@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import com.app.wallet.dbconnection.DbExecutor;
+import com.app.wallet.helpers.UserValidator;
 import com.app.wallet.http.JsonElem;
 
 @WebServlet(name="/SignUpAction", urlPatterns="/signup")
@@ -21,15 +24,18 @@ public class SignUpAction extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-//		String sql = "select * from users";
-//		DbExecutor exec = DbExecutor.init();
-//		String[] cols = {"id", "email", "password"};
-//		JsonElem ele = exec.select(sql, cols);		
-		
-		ServletOutputStream out = response.getOutputStream();
-		out.print("Test is correct");
-//		out.print(ele.toString(2));
-		
+			String email = request.getParameter("email");
+			String password = request.getParameter("email");
+			UserValidator validator = new UserValidator(email, password);
+			JSONObject resp = new JSONObject();
+			resp.put("email", email);
+			if(validator.isValid()) {
+				resp.put("message", "Login successfully");		
+			} else {
+				validator.createNewUser();
+				resp.put("message", "Signed Up successfully");				
+			}
+			response.sendRedirect(resp.toString());
 		}catch (Exception e) {			
 			e.printStackTrace();
 		}
