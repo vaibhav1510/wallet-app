@@ -21,14 +21,14 @@ public class SignUpAction extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-		String sql = "select * from users";
-		DbExecutor exec = DbExecutor.init();
-		String[] cols = {"id", "email", "password"};
-		JsonElem ele = exec.select(sql, cols);		
+//		String sql = "select * from users";
+//		DbExecutor exec = DbExecutor.init();
+//		String[] cols = {"id", "email", "password"};
+//		JsonElem ele = exec.select(sql, cols);		
 		
 		ServletOutputStream out = response.getOutputStream();
 		out.print("Test is correct");
-		out.print(ele.toString(2));
+//		out.print(ele.toString(2));
 		
 		}catch (Exception e) {			
 			e.printStackTrace();

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form action="SignUpAction">
+<form action="/app/signup">
 
 
 </form>
