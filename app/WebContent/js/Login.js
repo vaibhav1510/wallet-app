@@ -14,19 +14,19 @@ function genOrderSummary( email, Password) {
     $(this).ajaxhandler({
         url: "/app/signup",
         type: "POST",
-        data: {email_id: email, Password: password},
+        data: {email_id: email, Password: Password},
         success: function(responseJson, statusText, xhr, $form) {
         	
-        	  //var arr =JSON.parse(response.xhr.responseText);
+        	  var arr =JSON.parse(response.xhr.responseText);
   		  
-  			  //var datatemp = JSON.parse(arr.data);
+  			  var datatemp = JSON.parse(arr.data);
 
-  			  //var emailId = datatemp.email;
-  			  //var client_token = datatemp.client_token;
-  			  //var url = datatemp.url;
-  			  //url = url + "?email=" + emailId + "&client_token=" + client_token;
+  			  var emailId = datatemp.email;
+  			  var client_token = datatemp.client_token;
+  			  var url = datatemp.url;
+  			  url = url + "?email=" + emailId + "&client_token=" + client_token;
   			  
-  			  url = "http://localhost:8080/app/index.html" ;//+ "?email=" + emailId + "&client_token=" + client_token;
+  			  //url = "http://localhost:8080/app/index.html" ;//+ "?email=" + emailId + "&client_token=" + client_token;
   			  
   			  window.open(url);
         },
