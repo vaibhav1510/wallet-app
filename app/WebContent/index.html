@@ -8,6 +8,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Kinetic HTML Template</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/Index.js"></script>
 <!--
 
 Template 2090 Kinetic
@@ -27,29 +29,29 @@ http://www.tooplate.com/view/2090-kinetic
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
-    <body>
+    <body onload="ReadInputData()">
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
 
         <div class="ct" id="t1">
-          <div class="ct" id="t2">
-            <div class="ct" id="t3">
+<!--           <div class="ct" id="t2">
+            <div class="ct" id="t3"> -->
               <div class="ct" id="t4">
                 <section>  
                  <ul>
                    <a href="#t1"><li class="icon fa fa-home" id="uno"></li></a>
-                   <a href="#t2"><li class="icon fa fa-user" id="dos"></li></a>
-                   <a href="#t3"><li class="icon fa fa-image" id="tres"></li></a>
+<!--                    <a href="#t2"><li class="icon fa fa-user" id="dos"></li></a>
+                   <a href="#t3"><li class="icon fa fa-image" id="tres"></li></a> -->
                    <a href="#t4"><li class="icon fa fa-phone" id="cuatro"></li></a>
                  </ul>
                   <div class="page" id="p1">
                      <li class="icon fa fa-home">
                      	<span class="title">Welcome To</span>
-                     	<h4>UseBalace</h4>
+                     	<h4>Call Balance</h4>
                      	<p>You can check all your connected wallet balance here...</p>
-                     		<div class="primary-button"><a href="#t2">Check Now</a></div>
+                     		<div id="Check-Bal" class="primary-button"><a href="#t4">Check Now</a></div>
                      </li>   
                   </div>
                   <!-- <div class="page" id="p2">
@@ -113,7 +115,7 @@ http://www.tooplate.com/view/2090-kinetic
                     </li>
                   </div> -->
                   <div class="page" id="p4">
-                   <li class="icon fa fa-phone"><span class="title">UseBalace</span>
+                   <li class="icon fa fa-phone"><span class="title">Call Balance</span>
                     <div class="container">
                       <div class="row">
                         <div class="col-md-6">
@@ -164,7 +166,7 @@ http://www.tooplate.com/view/2090-kinetic
                             </form> 
                          </div>
                          <div class="col-md-6">
-                           <div class="right-info">
+                           <div class="right-info" background-color="#e5d3f1" color="#5c2677">
                               <p>Travel<br><br>
                               <!--  Details: <br>  -->	
 			                    <head>
@@ -172,11 +174,13 @@ http://www.tooplate.com/view/2090-kinetic
 			                        table, th, td {
 			                            border: 1px solid black;
 			                            font-size: small;
+			                            background-color: #e5d3f1;
+			                            color: #5c2677;
 			                        }
 			                        </style>
 			                    </head>
 			                    <body>
-			                        <table id="tableInput" style="width:70%">
+			                        <table id="tableInput" style="width:70%" background-color="#e5d3f1" color="#5c2677">
 			                          <tr>
 			                            <th>Phone number</th>
 			                            <th>Travel Provider</th> 
@@ -201,11 +205,11 @@ http://www.tooplate.com/view/2090-kinetic
                   </div>  
                   <p class="credit">Copyright &copy; 2017 Company Name 
                         
-                        - Designed by <a href="http://www.tooplate.com" target="_parent">Tooplate</a></p>
+                        - Designed by <a href="http://www.tooplate.com" target="_parent">Call Balance</a></p>
                 </section>
               </div>
-            </div>
-           </div>
+<!--             </div>
+           </div> -->
           </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -213,7 +217,6 @@ http://www.tooplate.com/view/2090-kinetic
 
         <script src="js/vendor/bootstrap.min.js"></script>
 
-		<script  src="js/Login.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
         
