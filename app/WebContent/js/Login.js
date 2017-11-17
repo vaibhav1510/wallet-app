@@ -22,11 +22,9 @@ function genOrderSummary( email, password) {
 		           success: function(data)
 		           {
 		        	   console.log("SUCCESS");
-		               alert(data); // show response from the php script.
-		               
-		  			  url2 = "http://localhost:8080/app/index.html" ;//+ "?email=" + emailId + "&client_token=" + client_token;
-		  			  
-		  			  window.open(url2);
+		              alert(data); // show response from the php script.		               
+		  			  url2 = "http://localhost:8080/app/index.html" ;//+ "?email=" + emailId + "&client_token=" + client_token;		  			  
+		  			  window.location.href = url2;
 
 		           }
 		         });
