@@ -8,6 +8,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Kinetic HTML Template</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/Index.js"></script>
 <!--
 
 Template 2090 Kinetic
@@ -27,27 +29,32 @@ http://www.tooplate.com/view/2090-kinetic
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
-    <body>
+    <body onload="ReadInputData()">
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
 
         <div class="ct" id="t1">
-          <div class="ct" id="t2">
-            <div class="ct" id="t3">
+<!--           <div class="ct" id="t2">
+            <div class="ct" id="t3"> -->
               <div class="ct" id="t4">
                 <section>  
                  <ul>
                    <a href="#t1"><li class="icon fa fa-home" id="uno"></li></a>
-                   <a href="#t2"><li class="icon fa fa-user" id="dos"></li></a>
-                   <a href="#t3"><li class="icon fa fa-image" id="tres"></li></a>
+<!--                    <a href="#t2"><li class="icon fa fa-user" id="dos"></li></a>
+                   <a href="#t3"><li class="icon fa fa-image" id="tres"></li></a> -->
                    <a href="#t4"><li class="icon fa fa-phone" id="cuatro"></li></a>
                  </ul>
                   <div class="page" id="p1">
-                     <li class="icon fa fa-home"><span class="title">Welcome To</span><h4>Kinetic</h4><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius neque non imperdiet auctor. Duis sit amet velit eu lorem sollicitudin sodales.</p><div class="primary-button"><a href="#t2">Discover More</a></div></li>   
+                     <li class="icon fa fa-home">
+                     	<span class="title">Welcome To</span>
+                     	<h4>Call Balance</h4>
+                     	<p>You can check all your connected wallet balance here...</p>
+                     		<div id="Check-Bal" class="primary-button"><a href="#t4">Check Now</a></div>
+                     </li>   
                   </div>
-                  <div class="page" id="p2">
+                  <!-- <div class="page" id="p2">
                     <li class="icon fa fa-user"><span class="title">About Us</span>
                     <div class="container">
                       <div class="row">
@@ -106,14 +113,15 @@ http://www.tooplate.com/view/2090-kinetic
                         </div>
                       </div>
                     </li>
-                  </div>
+                  </div> -->
                   <div class="page" id="p4">
-                   <li class="icon fa fa-phone"><span class="title">Contact Us</span>
+                   <li class="icon fa fa-phone"><span class="title">Call Balance</span>
                     <div class="container">
                       <div class="row">
                         <div class="col-md-6">
-                           <form id="contact" action="" method="post">
-                              <div class="col-md-12">
+                      <form id="contact" action="" method="post">
+                      	<div class="right-info">
+                            <!--   <div class="col-md-12">
                                 <fieldset>
                                   <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" required="">
                                 </fieldset>
@@ -132,22 +140,63 @@ http://www.tooplate.com/view/2090-kinetic
                                 <fieldset>
                                   <button type="submit" id="form-submit" class="btn">Send Message</button>
                                 </fieldset>
-                              </div>
-                            </form>
+                              </div>-->
+                               <p>Wallets<br><br>
+                                 <!-- Details: <br>  -->
+			                    <head>
+			                        <style>
+			                        table, th, td {
+			                            border: 1px solid black;
+			                            font-size: small;
+			                        }
+			                        </style>
+			                    </head>
+			                    <body>
+			                        <table id="tableOutput" style="width:70%">
+			                          <tr>
+			                            <th>Phone number</th>
+			                            <th>Wallet Name</th> 
+			                            <th>Balance</th> 
+			                          </tr>
+			                        </table>
+								
+			                    </body>
+			                   	<br>
+			                   	</div>
+                            </form> 
                          </div>
                          <div class="col-md-6">
-                           <div class="right-info">
-                              <p>Lorem ipsum dolor , consectetur adipiscing elit. Nunc purus ligula, ullamcorper idermate velit id, vestibulum auc sapien. Sed quis mauris eget semps imperdiet rhoncus.<br><br>
-                              <em>120-360 Etiam mauris erat,<br>
-								Vestibulum eu augue nec, 10110<br>
-								Nam consequat<br></em></p>
-                              <ol class="social-icons">
+                           <div class="right-info" background-color="#e5d3f1" color="#5c2677">
+                              <p>Travel<br><br>
+                              <!--  Details: <br>  -->	
+			                    <head>
+			                        <style>
+			                        table, th, td {
+			                            border: 1px solid black;
+			                            font-size: small;
+			                            background-color: #e5d3f1;
+			                            color: #5c2677;
+			                        }
+			                        </style>
+			                    </head>
+			                    <body>
+			                        <table id="tableInput" style="width:70%" background-color="#e5d3f1" color="#5c2677">
+			                          <tr>
+			                            <th>Phone number</th>
+			                            <th>Travel Provider</th> 
+			                            <th>Balance</th> 
+			                          </tr>
+			                        </table>
+								
+			                    </body>
+			                   	<br>
+<!--                               <ol class="social-icons">
                                 <i><a href="#"><i class="fa fa-facebook"></i></a></i>
                                 <i><a href="#"><i class="fa fa-twitter"></i></a></i>
                                 <i><a href="#"><i class="fa fa-linkedin"></i></a></i>
                                 <i><a href="#"><i class="fa fa-rss"></i></a></i>
                                 <i><a href="#"><i class="fa fa-behance"></i></a></i>
-                              </ol>
+                              </ol> -->
                             </div>
                          </div>
                       </div>
@@ -156,11 +205,11 @@ http://www.tooplate.com/view/2090-kinetic
                   </div>  
                   <p class="credit">Copyright &copy; 2017 Company Name 
                         
-                        - Designed by <a href="http://www.tooplate.com" target="_parent">Tooplate</a></p>
+                        - Designed by <a href="http://www.tooplate.com" target="_parent">Call Balance</a></p>
                 </section>
               </div>
-            </div>
-           </div>
+<!--             </div>
+           </div> -->
           </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -170,6 +219,7 @@ http://www.tooplate.com/view/2090-kinetic
 
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+        
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
