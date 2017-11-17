@@ -24,8 +24,8 @@ public class SignUpAction extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String email = request.getParameter("email");
-			String password = request.getParameter("email");
+			String email = request.getParameter("email_id");
+			String password = request.getParameter("password");
 			UserValidator validator = new UserValidator(email, password);
 			JSONObject resp = new JSONObject();
 			resp.put("email", email);
