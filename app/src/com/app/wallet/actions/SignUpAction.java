@@ -33,8 +33,10 @@ public class SignUpAction extends HttpServlet {
 			if(isValid == null) {
 				validator.createNewUser();
 				resp.put("message", "Signed Up successfully");
+				resp.put("emailId", email);
 				resp.put("client_token", validator.clientToken());				
 			}else if(isValid) {
+				resp.put("emailId", email);
 				resp.put("message", "Login successfully");
 			} else {
 				resp.put("error", "Email or Password is wrong. Please try again");
