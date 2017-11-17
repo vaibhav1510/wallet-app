@@ -23,7 +23,7 @@ function genOrderSummary( email, password) {
 		           success: function(res)
 		           {
 		        	  console.log("SUCCESS");
-		              alert(res); // show response from the php script.	
+		              //alert(res); // show response from the php script.	
 		              
 		              //var datatemp = JSON.parse(res);
               
