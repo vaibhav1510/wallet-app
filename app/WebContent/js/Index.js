@@ -22,6 +22,12 @@ function ReadInputData()
 
 }
 
+function TravelLoad()
+{
+	alert("TravelLoad");
+}
+
+
 
 function UpdateWalletBalance(ResList, PhoneNum) 
 {
@@ -139,6 +145,36 @@ function UpdateBalance(res)
 
 
 
+$('#t4 > li').click(function() {
+
+	alert("t4");
+	    var url= "http://localhost:8080/app/getbalance";
+	    var mobile = "7338867999";
+	    
+	    $.ajax({
+	           type: "POST",
+	           url: url,
+	           data: {email_id: gEmailId, mobile_num:mobile, token:gToken},
+	           success: function(res)
+	           {
+	        	  console.log("SUCCESS");
+	              alert(res); // show response from the php script.	
+	                          
+	              UpdateBalance(res);
+
+	           },
+	           error: function (jqXHR, textStatus, errorThrown) {
+	               var respJSON = ajaxResponseHandlers["defhandler"].parse(jqXHR.responseText);
+	               if (_.has(respJSON, "errors")) {
+	                   ajaxResponseHandlers["formhandler"].error(jqXHR, textStatus, errorThrown);
+	               }
+	           }
+	         });
+
+	    e.preventDefault(); // avoid to execute the actual submit of the form.
+
+
+});
 
 
 

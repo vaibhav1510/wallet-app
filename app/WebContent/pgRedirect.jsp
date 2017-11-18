@@ -29,7 +29,7 @@ parameters.put("INDUSTRY_TYPE_ID",PaytmConstants.INDUSTRY_TYPE_ID);
 parameters.put("WEBSITE",PaytmConstants.WEBSITE);
 parameters.put("MOBILE_NO","9876543210");
 parameters.put("EMAIL","test@gmail.com");
-parameters.put("CALLBACK_URL", "http://bfea28aa.ngrok.io/app/index.html");
+parameters.put("CALLBACK_URL", "http://f3eea6a8.ngrok.io/app/index.html");
 //parameters.put("CALLBACK_URL", "http://localhost:8080/app/pgResponse.jsp");
 String checkSum =  CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(PaytmConstants.MERCHANT_KEY, parameters);
 StringBuilder outputHtml = new StringBuilder();
