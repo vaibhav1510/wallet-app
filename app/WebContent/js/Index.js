@@ -31,33 +31,27 @@ function TravelLoad()
 
 function UpdateWalletBalance(ResList, PhoneNum) 
 {
-	var tblWallet = document.getElementById("tableOutput");
- 
-	var rowCount = tblWallet.rows.length;
-	for (var i = rowCount - 1; i > 0; i--) {
-		tblWallet.deleteRow(i);
-	}
-	
+
 	//Add the data rows.
 	for (var i = 0; i < ResList.length; i++) 
 	{			 
-		  var datatemp = JSON.parse(ResList);
+		  var f1 = ResList[i];
 
-		  var f1 = datatemp.data;
-		  var phone = f1.phone;
-		  var travel = f1.travel;
+		  //var f1 = datatemp.data;
+		  var phone = PhoneNum;
+		  var travel = f1.name;
 		  var balance = f1.balance;
-		  console.log('Response:' + JSON.stringify(phone) + '  ' + JSON.stringify(travel) + '  ' + JSON.stringify(balance));
+		  console.log('Response:' + JSON.stringify(PhoneNum) + '  ' + JSON.stringify(name) + '  ' + JSON.stringify(balance));
 		  
-		  var tblWallet = document.getElementById("tableInput");
+		  var tblWallet = document.getElementById("tableOutput");
 		  
 		  row = tblWallet.insertRow(-1);
 		  
 		  var cellName = row.insertCell(-1);	
-		  cellName.innerHTML = f1.phone;
+		  cellName.innerHTML = PhoneNum;
 		  
 		  var cellValue = row.insertCell(-1);	
-		  cellValue.innerHTML = f1.travel;	
+		  cellValue.innerHTML = f1.name;	
 		  
 		  var cellValue = row.insertCell(-1);	
 		  cellValue.innerHTML = f1.balance;
@@ -68,33 +62,27 @@ function UpdateWalletBalance(ResList, PhoneNum)
 
 function UpdateTravelBalance(ResList, PhoneNum) 
 {
-	var tblTravel = document.getElementById("tableInput");
- 
-	var rowCount = tblTravel.rows.length;
-	for (var i = rowCount - 1; i > 0; i--) {
-		tblTravel.deleteRow(i);
-	}
 	
 	//Add the data rows.
 	for (var i = 0; i < ResList.length; i++) 
 	{			 
-		  var datatemp = JSON.parse(ResList);
+		  var f1 = ResList[i];
 
-		  var f1 = datatemp.data;
-		  var phone = f1.phone;
-		  var travel = f1.travel;
+		  //var f1 = datatemp.data;
+		  var phone = PhoneNum;
+		  var travel = f1.name;
 		  var balance = f1.balance;
-		  console.log('Response:' + JSON.stringify(phone) + '  ' + JSON.stringify(travel) + '  ' + JSON.stringify(balance));
+		  console.log('Response:' + JSON.stringify(PhoneNum) + '  ' + JSON.stringify(name) + '  ' + JSON.stringify(balance));
 		  
 		  var tblTravel = document.getElementById("tableInput");
 		  
 		  row = tblTravel.insertRow(-1);
 		  
 		  var cellName = row.insertCell(-1);	
-		  cellName.innerHTML = f1.phone;
+		  cellName.innerHTML = PhoneNum;
 		  
 		  var cellValue = row.insertCell(-1);	
-		  cellValue.innerHTML = f1.travel;	
+		  cellValue.innerHTML = f1.name;	
 		  
 		  var cellValue = row.insertCell(-1);	
 		  cellValue.innerHTML = f1.balance;
@@ -104,15 +92,37 @@ function UpdateTravelBalance(ResList, PhoneNum)
 
 function UpdateBalance(res) 
 {
-	var balance = JSON.parse(res);
+	var tblTravel = document.getElementById("tableInput");
+	 
+	var rowCount = tblTravel.rows.length;
+	for (var i = rowCount - 1; i > 0; i--) 
+	{
+		tblTravel.deleteRow(i);
+	}
 	
-	var phone = balance.phone;
+	var tblWallet = document.getElementById("tableOutput");
+	 
+	var rowCount = tblWallet.rows.length;
+	for (var i = rowCount - 1; i > 0; i--) 
+	{
+		tblWallet.deleteRow(i);
+	}
+		
+  var data = JSON.parse(res);
+  var balance = data.data;
+  
+  for (var val = 0; val < balance.length; val++) 
+  {
+	var phone = balance[0].phone;
 	
-	var walletList = balance.balanceListWallet;
-	var travelList = balance.balanceListTravel;
+	var walletList = balance[val].wallet;
+	var travelList = balance[val].travel;
 	
 	UpdateWalletBalance(walletList, phone);
 	UpdateTravelBalance(travelList, phone);
+  }
+	
+
 }
 
 $(document).ready(function() {
@@ -128,10 +138,10 @@ $(document).ready(function() {
 	           success: function(res)
 	           {
 	        	  console.log("SUCCESS");
-	              alert(res); // show response from the php script.	
+	              //alert(res); // show response from the php script.	
 	                          
 	              UpdateBalance(res);
-
+	        	 
 	           },
 	           error: function (jqXHR, textStatus, errorThrown) {
 	               var respJSON = ajaxResponseHandlers["defhandler"].parse(jqXHR.responseText);
@@ -141,7 +151,7 @@ $(document).ready(function() {
 	           }
 	         });
 
-	    e.preventDefault(); // avoid to execute the actual submit of the form.
+//	    e.preventDefault(); // avoid to execute the actual submit of the form.
 	});
 
 });

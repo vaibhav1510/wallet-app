@@ -2,15 +2,19 @@
 {
    "data":[
       {
-         "phone":1,
+         "phone":7338867999,
          "wallet":[
+		    {
+               "name":"Paypal",
+               "balance":"700"
+            },
             {
                "name":"PayTm",
-               "balance":"1200"
+               "balance":"900"
             },
             {
                "name":"PayUMoney",
-               "balance":"100"
+               "balance":"300"
             }
          ],
          "travel":[
@@ -20,7 +24,11 @@
             },
             {
                "name":"GoiBibo",
-               "balance":"100"
+               "balance":"300"
+            },
+			{
+               "name":"Makemytrip",
+               "balance":"500"
             }
          ]
       }
