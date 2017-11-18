@@ -1,7 +1,9 @@
 package com.app.wallet.models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.app.wallet.dbconnection.DbExecutor;
 import com.app.wallet.http.JsonElem;
@@ -35,8 +37,12 @@ public class App {
 		this.category = category;
 	}
 
-	public static List<App> getApps() throws Exception {
-		List<App> toRet = new ArrayList<App>();
+	public static Map<Long, App> toRet = new HashMap<Long, App>();
+	
+	public static Map<Long, App> getApps() throws Exception {
+		if(!toRet.isEmpty()) {
+			return toRet;
+		}	
 		String sql = "select * from apps";
 		DbExecutor exec = DbExecutor.init();
 		String[] cols = { "id", "name", "category" };
@@ -49,7 +55,7 @@ public class App {
 			a.setId(e.optLong("id"));
 			a.setName(e.str("name"));
 			a.setCategory(e.str("category"));
-			toRet.add(a);
+			toRet.put(a.getId(), a);
 		}
 		return toRet;
 	}
