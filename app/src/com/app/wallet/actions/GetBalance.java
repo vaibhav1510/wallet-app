@@ -14,7 +14,7 @@ import com.app.wallet.helpers.GetBalanceHelper;
 /**
  * Servlet implementation class GetBalance
  */
-@WebServlet("/GetBalance")
+@WebServlet(name = "/GetBalance", urlPatterns = "/getbalance")
 public class GetBalance extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -25,6 +25,7 @@ public class GetBalance extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
+			System.out.println("TESSSSSSTSTSTTST");
 			String email = request.getParameter("email");
 			GetBalanceHelper help = new GetBalanceHelper(email);
 			JSONObject resp = help.getBalance();

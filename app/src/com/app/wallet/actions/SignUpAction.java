@@ -30,7 +30,7 @@ public class SignUpAction extends HttpServlet {
 			String password = request.getParameter("password");
 			UserValidator validator = new UserValidator(email, password);
 			JSONObject resp = new JSONObject();
-			resp.put("emailId", email);
+			resp.put("email_id", email);
 			Boolean isValid = validator.isValid();
 			if(isValid == null) {
 				validator.createNewUser();								

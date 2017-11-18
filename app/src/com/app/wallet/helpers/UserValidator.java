@@ -1,7 +1,7 @@
 package com.app.wallet.helpers;
 
 import com.app.wallet.dbconnection.DbExecutor;
-import com.app.wallet.http.JsonElem;
+import com.app.wallet.models.User;
 import com.app.wallet.utils.AESEncryption;
 import com.app.wallet.utils.AESEncryption.Password;
 
@@ -18,16 +18,12 @@ public class UserValidator {
 	}
 
 	public Boolean isValid() throws Exception {
-		String sql = "select * from users where email='" + email + "'";
-		DbExecutor exec = DbExecutor.init();
-		String[] cols = { "id", "email", "password", "sec_key" };
-		JsonElem ele = exec.select(sql, cols);
-		if (ele.keys().size() == 0) {
+		User u = User.getUser(email);
+		if (u == null) {
 			return null;
 		}
-		this.clientToken = ele.str("sec_key");
-		String dbPass = AESEncryption.inst.decrypt(new Password(clientToken, ele.str("password")));
-		return passwd.equals(dbPass);
+		this.clientToken = u.getSecKey();				
+		return passwd.equals(u.dbPass());
 	}
 
 	public String clientToken() {
@@ -36,8 +32,7 @@ public class UserValidator {
 
 	public boolean createNewUser() throws Exception {
 		Password password = AESEncryption.inst.encypt(passwd);
-		String sql = new StringBuilder()
-		.append("insert into users set email='").append(email).append("', password='")
+		String sql = new StringBuilder().append("insert into users set email='").append(email).append("', password='")
 				.append(password.encPasswd).append("', sec_key='").append(password.secretKey).append("'").toString();
 		this.clientToken = password.secretKey;
 		DbExecutor exec = DbExecutor.init();
