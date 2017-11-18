@@ -1,0 +1,28 @@
+
+{
+   "data":[
+      {
+         "phone":1,
+         "wallet":[
+            {
+               "name":"PayTm",
+               "balance":"1200"
+            },
+            {
+               "name":"PayUMoney",
+               "balance":"100"
+            }
+         ],
+         "travel":[
+            {
+               "name":"Jet Airways",
+               "balance":"1200"
+            },
+            {
+               "name":"GoiBibo",
+               "balance":"100"
+            }
+         ]
+      }
+   ]
+}
