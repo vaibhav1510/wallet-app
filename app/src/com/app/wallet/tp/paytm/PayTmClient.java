@@ -10,9 +10,6 @@ import com.app.wallet.http.HttpUtil;
 import com.paytm.pg.merchant.CheckSumServiceHelper;
 
 public class PayTmClient {
-
-	
-	
 	
 	public void genChecksome() throws Exception {
 

@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.app.wallet.http.HttpConfig;
+import com.app.wallet.http.HttpConfig.AuthenticationScheme;
 import com.app.wallet.http.HttpUtil;
 import com.app.wallet.http.JsonElem;
 
@@ -20,10 +21,12 @@ public class PayTmCli {
 	private final HttpUtil http;
 
 	public PayTmCli() {
-		http = new HttpUtil(new HttpConfig(""));
+		HttpConfig config = new HttpConfig(null, null, "application/json", "application/json;charset=utf-8")
+				.authenticationScheme(AuthenticationScheme.BASIC);
+		http = new HttpUtil(config);
 	}
 
-	public void requestOtp(String phone) throws Exception {
+	public String requestOtp(String phone) throws Exception {
 		try {
 			JSONObject params = new JSONObject();
 			params.put("phone", phone);
@@ -34,31 +37,33 @@ public class PayTmCli {
 
 			JsonElem res = sendRequest("/signin/otp", params.toString());
 			System.out.println(res.toString(2));
+			return res.str("state");			
 		} catch (JSONException jex) {
 			throw new RuntimeException(jex.getMessage());
 		}
 	}
-	
-	public void validateOtp(String state, String otp) throws Exception {
+
+	public String validateOtp(String state, String otp) throws Exception {
 		try {
 			JSONObject params = new JSONObject();
 			params.put("otp", otp);
 			params.put("state", state);
 			params.put("scope", "paytm");
-			params.put("responseType", "token");			
+			params.put("responseType", "token");
 
 			JsonElem res = sendRequest("/login/validate/otp", params.toString());
 			System.out.println(res.toString(2));
+			return res.str("code");
 		} catch (JSONException jex) {
 			throw new RuntimeException(jex.getMessage());
 		}
 	}
-	
+
 	public void getBalance(String token) throws Exception {
 		try {
 			JSONObject params = new JSONObject();
 			params.put("MID", PaytmConstants.MID);
-			params.put("token", token);					
+			params.put("token", token);
 
 			JsonElem res = getReq("/login/validate/otp", params.toString());
 			System.out.println(res.toString(2));
@@ -71,7 +76,7 @@ public class PayTmCli {
 		List<JsonElem> elems = getRequest(path, content, false);
 		return elems.get(0);
 	}
-	
+
 	private JsonElem sendRequest(String path, String content) throws Exception {
 		List<JsonElem> elems = _sendRequest(path, content, false);
 		return elems.get(0);
@@ -124,8 +129,7 @@ public class PayTmCli {
 			}
 		}
 	}
-	
-	
+
 	private List<JsonElem> getRequest(String path, String content, boolean isListReq) throws Exception {
 		HttpUtil.Response resp = get(path, content);
 		JsonElem respJson = null;
@@ -154,7 +158,7 @@ public class PayTmCli {
 		}
 		return respElems; // errCode cases should not come here
 	}
-	
+
 	private HttpUtil.Response get(String path, String content) throws Exception {
 		try {
 			return http.get(PaytmConstants.BASE_URL + path, content);

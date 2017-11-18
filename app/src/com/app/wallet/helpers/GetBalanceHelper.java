@@ -23,11 +23,11 @@ public class GetBalanceHelper {
 	
 	
 	public JSONObject getBalance() throws Exception {
-		File f = new File("../../../Hackathon/res.json");		
+		File f = new File("../../../../../wallet-app/res.json");		
 		System.out.println(f.getAbsolutePath());
 		String json = FileUtils.readFileToString(f);
 		//getBalance1();
-		return new JSONObject(json);
+		return new JSONObject(json);		
 	}
 
 	public JSONObject getBalance1() throws Exception {

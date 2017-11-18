@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import com.app.wallet.dbconnection.DbExecutor;
 import com.app.wallet.helpers.UserValidator;
 import com.app.wallet.http.JsonElem;
+import com.app.wallet.tp.paytm.PayTmCli;
 
 @WebServlet(name="/SignUpAction", urlPatterns="/signup")
 public class SignUpAction extends HttpServlet {
@@ -45,7 +46,7 @@ public class SignUpAction extends HttpServlet {
 				resp.put("error", "Email or Password is wrong. Please try again");
 			}
 			System.out.println(resp.toString(2));
-			response.getWriter().write(resp.toString());
+			response.getWriter().write(resp.toString());			
 //			response.sendRedirect(resp.toString());
 		}catch (Exception e) {			
 			e.printStackTrace();

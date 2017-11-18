@@ -193,6 +193,9 @@ public class HttpUtil {
 
 	private Response doFormSubmit(String url, Method m, String queryStr, Map<String, String> extraHeaders,
 			boolean throwIfEmptyResp) throws IOException {
+		System.out.println("URL => " + url);
+		System.out.println("Query String => " + queryStr);		
+
 		HttpURLConnection conn = createConnection(url, m, extraHeaders);
 		writeContent(conn, queryStr);
 		Response resp = sendRequest(conn, throwIfEmptyResp);
