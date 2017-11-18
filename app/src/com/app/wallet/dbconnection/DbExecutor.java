@@ -41,21 +41,21 @@ public class DbExecutor {
 		ResultSet rs = stmt.executeQuery(sql);
 		JsonElem ele = createJsonElem(rs, cols);
 		rs.close();
-		stmt.close();
+		stmt.close();		
 		return ele.nodes("data");
 	}
 
 	public JsonElem createJsonElem(ResultSet rs, String[] cols) throws Exception {
-		JSONArray arr = new JSONArray();
-		JSONObject json = new JSONObject();
+		JSONArray arr = new JSONArray();		
 		while (rs.next()) {
+			JSONObject json = new JSONObject();
 			for (String key : cols) {				
 				json.put(key, rs.getObject(key).toString());
 			}
 			arr.put(json);			
 		}
 		JSONObject toRet = new JSONObject();
-		toRet.put("data", arr);		
+		toRet.put("data", arr);			
 		return new JsonElem(toRet.toString());
 	}
 }

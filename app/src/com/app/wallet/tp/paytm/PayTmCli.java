@@ -35,9 +35,9 @@ public class PayTmCli {
 			params.put("responseType", "token");
 			params.put("redirectUri", "https://pguat.paytm.com/oltp-web/oauthResponse");
 
-			JsonElem res = sendRequest("/signin/otp", params.toString());
+			JsonElem res = sendRequest(PaytmConstants.BASE_URL + "/signin/otp", params.toString());
 			System.out.println(res.toString(2));
-			return res.str("state");			
+			return res.str("state");
 		} catch (JSONException jex) {
 			throw new RuntimeException(jex.getMessage());
 		}
@@ -51,7 +51,7 @@ public class PayTmCli {
 			params.put("scope", "paytm");
 			params.put("responseType", "token");
 
-			JsonElem res = sendRequest("/login/validate/otp", params.toString());
+			JsonElem res = sendRequest(PaytmConstants.BASE_URL + "/login/validate/otp", params.toString());
 			System.out.println(res.toString(2));
 			return res.str("code");
 		} catch (JSONException jex) {
@@ -65,7 +65,7 @@ public class PayTmCli {
 			params.put("MID", PaytmConstants.MID);
 			params.put("token", token);
 
-			JsonElem res = getReq("/login/validate/otp", params.toString());
+			JsonElem res = getReq("https://pguat.paytm.com/oltp/HANDLER_INTERNAL/checkBalance", params.toString());
 			System.out.println(res.toString(2));
 		} catch (JSONException jex) {
 			throw new RuntimeException(jex.getMessage());
@@ -161,7 +161,7 @@ public class PayTmCli {
 
 	private HttpUtil.Response get(String path, String content) throws Exception {
 		try {
-			return http.get(PaytmConstants.BASE_URL + path, content);
+			return http.get(path, content);
 		} catch (IOException exp) {
 			if (exp instanceof ConnectException || exp instanceof UnknownHostException) {
 				throw new RuntimeException("connection timeout");
