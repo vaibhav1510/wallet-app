@@ -156,12 +156,13 @@ public class HttpUtil {
 		return post(url, params == null ? null : toQueryStr(params.map()), extraHeaders, throwIfEmptyResp);
 	}
 
-	public Response get(String url, String content) throws IOException {
+	public Response get(String url, String content, Map<String, String> extraHeaders) throws IOException {
 		String queryStr = content == null ? null : content;
 		if (queryStr != null && !queryStr.isEmpty()) {
 			url = url + '?' + queryStr;
 		}
-		HttpURLConnection conn = createConnection(url, Method.GET, null);
+		System.out.println("URL => " + url);		
+		HttpURLConnection conn = createConnection(url, Method.GET, extraHeaders);
 		Response resp = sendRequest(conn, true);
 		return resp;
 	}

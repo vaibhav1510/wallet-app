@@ -32,10 +32,12 @@ public class GetBalance extends HttpServlet {
 			JSONObject resp = help.getBalance();
 			System.out.println(resp.toString(2));
 			
-//			PayTmCli cli = new PayTmCli();
-//			String state = cli.requestOtp("7777777777");
-//			String code = cli.validateOtp(state, "489871");
+			PayTmCli cli = new PayTmCli();
+			String state = cli.requestOtp("7777777777");
+			String accessCode = cli.validateOtp(state, "489871");
+			String amount = cli.getBalance(accessCode);
 			
+			System.out.println(amount);
 			response.getWriter().write(resp.toString());
 		} catch (Exception e) {
 			e.printStackTrace();

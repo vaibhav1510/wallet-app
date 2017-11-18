@@ -6,6 +6,7 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,13 +16,14 @@ import com.app.wallet.http.HttpConfig;
 import com.app.wallet.http.HttpConfig.AuthenticationScheme;
 import com.app.wallet.http.HttpUtil;
 import com.app.wallet.http.JsonElem;
+import com.google.common.collect.ImmutableMap;
 
 public class PayTmCli {
 
 	private final HttpUtil http;
 
 	public PayTmCli() {
-		HttpConfig config = new HttpConfig(null, null, "application/json", "application/json;charset=utf-8")
+		HttpConfig config = new HttpConfig("staging-hackathalon", "51e6d096-56f6-40b4-a2b9-9e0f8fa704b8", "application/json", "application/json;charset=utf-8")
 				.authenticationScheme(AuthenticationScheme.BASIC);
 		http = new HttpUtil(config);
 	}
@@ -30,10 +32,9 @@ public class PayTmCli {
 		try {
 			JSONObject params = new JSONObject();
 			params.put("phone", phone);
-			params.put("clientId", "paytm-pg-client-staging");
+			params.put("clientId", "staging-hackathalon");
 			params.put("scope", "wallet");
 			params.put("responseType", "token");
-			params.put("redirectUri", "https://pguat.paytm.com/oltp-web/oauthResponse");
 
 			JsonElem res = sendRequest(PaytmConstants.BASE_URL + "/signin/otp", params.toString());
 			System.out.println(res.toString(2));
@@ -51,29 +52,34 @@ public class PayTmCli {
 			params.put("scope", "paytm");
 			params.put("responseType", "token");
 
-			JsonElem res = sendRequest(PaytmConstants.BASE_URL + "/login/validate/otp", params.toString());
+			JsonElem res = sendRequest(PaytmConstants.BASE_URL + "/signin/validate/otp", params.toString());
 			System.out.println(res.toString(2));
-			return res.str("code");
+			return res.str("access_token");
 		} catch (JSONException jex) {
 			throw new RuntimeException(jex.getMessage());
 		}
 	}
 
-	public void getBalance(String token) throws Exception {
+	public String getBalance(String token) throws Exception {
 		try {
-			JSONObject params = new JSONObject();
-			params.put("MID", PaytmConstants.MID);
-			params.put("token", token);
-
-			JsonElem res = getReq("https://pguat.paytm.com/oltp/HANDLER_INTERNAL/checkBalance", params.toString());
+//			JSONObject params = new JSONObject();
+//			params.put("ssotoken", token);
+//			params.put("ssotoken", PaytmConstants.MID);
+//			params.put("token", token);
+			
+			Map<String, String> extraHeaders= ImmutableMap.of("ssotoken",token);
+			
+			JsonElem res = getReq("https://trust-uat.paytm.in/wallet-web/checkBalance", null, extraHeaders);
+			
 			System.out.println(res.toString(2));
+			return res.node("response").str("amount");
 		} catch (JSONException jex) {
 			throw new RuntimeException(jex.getMessage());
 		}
 	}
 
-	private JsonElem getReq(String path, String content) throws Exception {
-		List<JsonElem> elems = getRequest(path, content, false);
+	private JsonElem getReq(String path, String content, Map<String, String> extraHeaders) throws Exception {
+		List<JsonElem> elems = getRequest(path, content, false, extraHeaders);
 		return elems.get(0);
 	}
 
@@ -117,7 +123,7 @@ public class PayTmCli {
 
 	private HttpUtil.Response post(String path, String content) throws Exception {
 		try {
-			return http.post(PaytmConstants.BASE_URL + path, content);
+			return http.post(path, content);
 		} catch (IOException exp) {
 			if (exp instanceof ConnectException || exp instanceof UnknownHostException) {
 				throw new RuntimeException("connection timeout");
@@ -130,8 +136,8 @@ public class PayTmCli {
 		}
 	}
 
-	private List<JsonElem> getRequest(String path, String content, boolean isListReq) throws Exception {
-		HttpUtil.Response resp = get(path, content);
+	private List<JsonElem> getRequest(String path, String content, boolean isListReq, Map<String, String> extraHeaders) throws Exception {		
+		HttpUtil.Response resp = get(path, content, extraHeaders);
 		JsonElem respJson = null;
 		List<JsonElem> respElems = new ArrayList<>();
 		try {
@@ -141,6 +147,8 @@ public class PayTmCli {
 					respElems.add(new JsonElem(jArr.getJSONObject(i)));
 				}
 			} else {
+				System.out.println(resp.toString());
+				System.out.println(resp.json());
 				respJson = resp.json();
 				respElems.add(respJson);
 			}
@@ -159,9 +167,9 @@ public class PayTmCli {
 		return respElems; // errCode cases should not come here
 	}
 
-	private HttpUtil.Response get(String path, String content) throws Exception {
-		try {
-			return http.get(path, content);
+	private HttpUtil.Response get(String path, String content, Map<String, String> extraHeaders) throws Exception {
+		try {			
+			return http.get(path, content, extraHeaders);
 		} catch (IOException exp) {
 			if (exp instanceof ConnectException || exp instanceof UnknownHostException) {
 				throw new RuntimeException("connection timeout");

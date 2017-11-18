@@ -1,6 +1,5 @@
-curl https://accounts-uat.paytm.com/login/validate/otp -X POST -H "Content-Type: application/json" -d '{
-   "otp":"489871",
-   "state":"11381148-5de4-482f-9bec-365c898a8084",
-   "scope":"wallet",
-   "responseType":"token"
+curl https://accounts-uat.paytm.com/signin/validate/otp -X POST -H "Content-Type: application/json" \
+-u staging-hackathalon:51e6d096-56f6-40b4-a2b9-9e0f8fa704b8 -d '{
+   "otp":"532523",
+   "state":"9a7f2754-3ec6-49ea-bb70-bcbd5d28ca5e"
 }'

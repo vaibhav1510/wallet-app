@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script src="https://accounts-uat.paytm.com/pages/themesv2/scripts/paytm-pg.min.js?ver=1508828587664"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {	
+	var resp = Paytm.API.OAuth.send_otp("test@example.com","9940316078");
+	console.log(resp);
+});
+</script>
+</body>
+</html>

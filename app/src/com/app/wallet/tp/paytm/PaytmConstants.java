@@ -10,4 +10,5 @@ public class PaytmConstants {
 	  public final static String PAYTM_URL="https://pguat.paytm.com/oltp-web/processTransaction";
 	  
 	  public final static String  BASE_URL = "https://accounts-uat.paytm.com";
+	  
 }
