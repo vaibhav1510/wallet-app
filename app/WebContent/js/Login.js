@@ -23,20 +23,17 @@ function genOrderSummary( email, password) {
 		           success: function(res)
 		           {
 		        	  console.log("SUCCESS");
-		              //alert(res); // show response from the php script.	
+		        	  alert(res); // show response from the php script.	
 		              
-		              //var datatemp = JSON.parse(res);
-              
-        			  //var emailId = datatemp.email;
-        			  //var client_token = datatemp.client_token;
-            		  //var url = datatemp.url;
-            		  //url = url + "?email=" + emailId + "&client_token=" + client_token;
+		          var datatemp = JSON.parse(res);              
+        			  var emailId = datatemp.email;
+        			  var client_token = datatemp.client_token;
+            		  var url = datatemp.url;
+            		  url = url + "?email=" + emailId + "&client_token=" + client_token;
 		              
-		              emailId = "test@test.com";
-		              client_token = "1234567";
 		              		              
-		  			  url2 = "http://localhost:8080/app/index.html" + "?email=" + emailId + "&client_token=" + client_token;		  			  
-		  			  window.location.href = url2;
+//		  			  url2 = "http://localhost:8080/app/index.html" + "?email=" + emailId + "&client_token=" + client_token;		  			  
+		  			  window.location.href = url;
 
 		           },
 		           error: function (jqXHR, textStatus, errorThrown) {

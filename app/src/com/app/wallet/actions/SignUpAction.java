@@ -1,6 +1,8 @@
 package com.app.wallet.actions;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -28,14 +30,23 @@ public class SignUpAction extends HttpServlet {
 			String password = request.getParameter("password");
 			UserValidator validator = new UserValidator(email, password);
 			JSONObject resp = new JSONObject();
-			resp.put("email", email);
-			if(validator.isValid()) {
-				resp.put("message", "Login successfully");		
-			} else {
-				validator.createNewUser();
+			resp.put("emailId", email);
+			Boolean isValid = validator.isValid();
+			if(isValid == null) {
+				validator.createNewUser();								
+				resp.put("client_token", validator.clientToken());
+				resp.put("url", "http://localhost:8080/app/index.html");
 				resp.put("message", "Signed Up successfully");				
+			}else if(isValid) {				
+				resp.put("client_token", validator.clientToken());
+				resp.put("url", "http://localhost:8080/app/index.html");
+				resp.put("message", "Login successfully");				
+			} else {
+				resp.put("error", "Email or Password is wrong. Please try again");
 			}
-			response.sendRedirect(resp.toString());
+			System.out.println(resp.toString(2));
+			response.getWriter().write(resp.toString());
+//			response.sendRedirect(resp.toString());
 		}catch (Exception e) {			
 			e.printStackTrace();
 		}

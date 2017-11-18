@@ -17,7 +17,7 @@ function ReadInputData()
 	var temp = parameters[0].split("=");
 	gEmailId = unescape(temp[1]);
 	
-	var temp = parameters[1].split("=");
+	temp = parameters[1].split("=");
 	gToken = unescape(temp[1]);
 
 }
