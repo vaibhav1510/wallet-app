@@ -25,9 +25,9 @@ public class GetBalance extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			System.out.println("TESSSSSSTSTSTTST");
-			String email = request.getParameter("email");
+			String email = request.getParameter("email_id");
 			GetBalanceHelper help = new GetBalanceHelper(email);
+			
 			JSONObject resp = help.getBalance();
 			System.out.println(resp.toString(2));
 			response.getWriter().write(resp.toString());

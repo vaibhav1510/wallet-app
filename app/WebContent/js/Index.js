@@ -115,6 +115,7 @@ function UpdateBalance(res)
 	UpdateTravelBalance(travelList, phone);
 }
 
+$(document).ready(function() {
 	$("#cuatro").click(function(e) {
 		
 	    var url= "http://localhost:8080/app/getbalance";
@@ -143,6 +144,7 @@ function UpdateBalance(res)
 	    e.preventDefault(); // avoid to execute the actual submit of the form.
 	});
 
+});
 
 
 $('#t4 > li').click(function() {

@@ -3,6 +3,8 @@ package com.app.wallet.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import com.app.wallet.dbconnection.DbExecutor;
 import com.app.wallet.http.JsonElem;
 
@@ -63,5 +65,16 @@ public class UserWallet {
 
 	public void setBalance(Integer balance) {
 		this.balance = balance;
+	}
+	
+	public String category() {
+		return app.getCategory();
+	}
+
+	public JSONObject toJson() throws Exception {
+		JSONObject obj = new JSONObject();
+		obj.put("name", app.getName());
+		obj.put("balance", balance);
+		return obj;
 	}
 }
