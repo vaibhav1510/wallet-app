@@ -12,72 +12,45 @@ function genOrderSummary(email, password) {
 	$("#loginForm").submit(
 			function(e) {
 
-				var url = "http://localhost:8080/app/signup";
 
-				$.ajax({
-					type : "POST",
-					url : url,
-					data : {
-						email_id : email,
-						password : password
-					},
-					success : function(res) {
-						alert(res); // show response from the php script.
+ // <script type="text/javascript"></script>
+function genOrderSummary( email, password) {
+	
+		$("#loginForm").submit(function(e) {
+			
+		    var url= "http://localhost:8080/app/signup";
 
-						var datatemp = JSON.parse(res);
-						var emailId = datatemp.email_id;
-						var client_token = datatemp.client_token;
-						var url = datatemp.url;
-						url = url + "?email=" + emailId + "&client_token="
-								+ client_token;
 
-						window.location.href = url;
+		    $.ajax({
+		           type: "POST",
+		           url: url,
+		           data: {email_id: email, password: password},
+		           success: function(res)
+		           {
+		        	  console.log("SUCCESS");
+		        	  alert(res); // show response from the php script.	
+		              
 
-					},
-					error : function(jqXHR, textStatus, errorThrown) {
-						var respJSON = ajaxResponseHandlers["defhandler"]
-								.parse(jqXHR.responseText);
-						if (_.has(respJSON, "errors")) {
-							ajaxResponseHandlers["formhandler"].error(jqXHR,
-									textStatus, errorThrown);
-						}
-					}
-				});
+					var datatemp = JSON.parse(res);
+					var emailId = datatemp.email_id;
+					var client_token = datatemp.client_token;
+					var url = datatemp.url;
+					url = url + "?email=" + emailId + "&client_token="
+							+ client_token;
 
-				e.preventDefault(); // avoid to execute the actual submit of the
-									// form.
-			});
-	// $(this).ajaxhandler({
-	// url: "http://localhost:8080/app/signup",
-	// type: "POST",
-	// data: {email_id: email, Password: password},
-	//        
-	// success: function(responseJson, statusText, xhr, $form) {
-	// Console.log("SUCCESS");
-	// //var arr =JSON.parse(response.xhr.responseText);
-	//  		  
-	// //var datatemp = JSON.parse(arr.data);
-	//
-	// //var emailId = datatemp.email;
-	// //var client_token = datatemp.client_token;
-	// //var url = datatemp.url;
-	// //url = url + "?email=" + emailId + "&client_token=" + client_token;
-	//  			  
-	// // url = "http://localhost:8080/app/index.html" ;//+ "?email=" + emailId
-	// + "&client_token=" + client_token;
-	// //
-	// // window.open(url);
-	// },
-	// error: function (jqXHR, textStatus, errorThrown) {
-	// Console.log("ERRORR");
-	// var respJSON =
-	// ajaxResponseHandlers["defhandler"].parse(jqXHR.responseText);
-	// if (_.has(respJSON, "errors")) {
-	// ajaxResponseHandlers["formhandler"].error(jqXHR, textStatus,
-	// errorThrown);
-	// }
-	// }
-	// });
+					window.location.href = url;
+					
+		           },
+		           error: function (jqXHR, textStatus, errorThrown) {
+		               var respJSON = ajaxResponseHandlers["defhandler"].parse(jqXHR.responseText);
+		               if (_.has(respJSON, "errors")) {
+		                   ajaxResponseHandlers["formhandler"].error(jqXHR, textStatus, errorThrown);
+		               }
+		           }
+		         });
+
+		    e.preventDefault(); // avoid to execute the actual submit of the form.
+		});
 }
 
 $('#Submit-Login').click(function() {

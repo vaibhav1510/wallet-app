@@ -9,15 +9,27 @@ TreeMap<String,String> parameters = new TreeMap<String,String>();
 String paytmChecksum =  "";
 while(paramNames.hasMoreElements()) {
 	String paramName = (String)paramNames.nextElement();
-	parameters.put(paramName,mapData.get(paramName)[0]);	
+	//parameters.put(paramName,mapData.get(paramName)[0]);	
 }
+
+Random randomGenerator = new Random();
+int randomInt = randomGenerator.nextInt(1000000);
+
+String orderId = "ORDS_" + String.valueOf(randomInt);
+
+parameters.put("ORDER_ID",orderId);
+parameters.put("CUST_ID","CUST001");
+parameters.put("INDUSTRY_TYPE_ID",  "Retail");
+parameters.put("CHANNEL_ID","WEB");
+parameters.put("TXN_AMOUNT","1");
+
 parameters.put("MID",PaytmConstants.MID);
 parameters.put("CHANNEL_ID",PaytmConstants.CHANNEL_ID);
 parameters.put("INDUSTRY_TYPE_ID",PaytmConstants.INDUSTRY_TYPE_ID);
 parameters.put("WEBSITE",PaytmConstants.WEBSITE);
 parameters.put("MOBILE_NO","9876543210");
 parameters.put("EMAIL","test@gmail.com");
-parameters.put("CALLBACK_URL", "http://bfea28aa.ngrok.io/app/pgResponse.jsp");
+parameters.put("CALLBACK_URL", "http://bfea28aa.ngrok.io/app/index.html");
 //parameters.put("CALLBACK_URL", "http://localhost:8080/app/pgResponse.jsp");
 String checkSum =  CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(PaytmConstants.MERCHANT_KEY, parameters);
 StringBuilder outputHtml = new StringBuilder();
