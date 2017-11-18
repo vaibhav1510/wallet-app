@@ -4,10 +4,16 @@ import java.util.Random;
 
 import com.payu.sdk.model.PaymentMethodComplete;
 import java.util.*;
+
+import com.app.wallet.http.HttpConfig;
+import com.app.wallet.http.HttpUtil;
 import com.paytm.pg.merchant.CheckSumServiceHelper;
 
 public class PayTmClient {
 
+	
+	
+	
 	public void genChecksome() throws Exception {
 
 		Random randomGenerator = new Random();

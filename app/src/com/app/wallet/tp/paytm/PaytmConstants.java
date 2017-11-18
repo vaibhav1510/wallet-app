@@ -7,5 +7,7 @@ public class PaytmConstants {
 	  public final static String INDUSTRY_TYPE_ID="Retail";
 	  public final static String CHANNEL_ID="WEB";
 	  public final static String WEBSITE="WEB_STAGING";
-	  public final static String PAYTM_URL="https://pguat.paytm.com/oltp-web/processTransaction"; 
+	  public final static String PAYTM_URL="https://pguat.paytm.com/oltp-web/processTransaction";
+	  
+	  public final static String  BASE_URL = "https://accounts-uat.paytm.com";
 }
