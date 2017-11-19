@@ -32,11 +32,13 @@ public class VerifyOtp extends HttpServlet {
 			String email = request.getParameter("email");
 			String state = request.getParameter("state");
 			String otp = request.getParameter("otp");
+			
 			ConnectWallethelper.getNUpdate(email, mobileNumber, "PayTm", state, otp);
 
 			JSONObject resp = new JSONObject();
 			resp.put("message", "Update Successfully");
 			response.getWriter().write(resp.toString());
+//			resp.put("url", "http://localhost:8080/app/getbalance");
 			response.sendRedirect("/getbalance");
 		} catch (Exception e) {
 			e.printStackTrace();

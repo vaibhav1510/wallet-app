@@ -29,9 +29,11 @@ public class ConnectWallet extends HttpServlet {
 			String state = ConnectWallethelper.generateState(mobileNumber, "PayTm");
 
 			JSONObject resp = new JSONObject();
+			
 			resp.put("email_id", request.getParameter("email"));
-			resp.put("mobileNumber", mobileNumber);
+			resp.put("mobile_number", mobileNumber);
 			resp.put("state", state);
+			resp.put("url", "http://localhost:8080/app/WalletOTP.html");
 
 			System.out.println(resp.toString(2));
 			response.getWriter().write(resp.toString());

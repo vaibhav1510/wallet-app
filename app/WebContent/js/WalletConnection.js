@@ -17,33 +17,28 @@ function ShowHideInput()
 	email = unescape(temp[1]);
 }
 
-function genOTP(email, password) {
+function genOTP(email, mobile) {
 
 	$("#WalletloginForm").submit(
 	function(e) {
-
-		var url = "http://localhost:8080/app/signup";
-
+		var url = "http://localhost:8080/app/connectwallet";
 		$.ajax({
 			type : "POST",
 			url : url,
 			data : {
-				email_id : email,
-				password : password
+				email : email,
+				mobile : mobile
 			},
-			success : function(res) {
-				console.log("SUCCESS");
-				alert(res); // show response from the php script.
+			success : function(res) {				
+				alert(res);
 
 				var datatemp = JSON.parse(res);
-				var emailId = datatemp.email_id;
-				var client_token = datatemp.client_token;
+				var email = datatemp.email_id;
+				var mobile = datatemp.mobile_number;
+				var state = datatemp.state;
 				var url = datatemp.url;
-				url = url + "?email=" + emailId + "&client_token="
-						+ client_token;
-
+				url = url + "?email=" + email + "&mobile="+ mobile+"&state="+state;
 				window.location.href = url;
-
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
 				var respJSON = ajaxResponseHandlers["defhandler"]
