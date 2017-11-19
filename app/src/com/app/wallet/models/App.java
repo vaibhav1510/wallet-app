@@ -39,6 +39,15 @@ public class App {
 
 	public static Map<Long, App> toRet = new HashMap<Long, App>();
 	
+	public static App getApp(String walletName) throws Exception {
+		for(App a: getApps().values()) {
+			if(a.getName().equals(walletName)) {
+				return a;
+			}			
+		}		
+		return null;
+	}
+	
 	public static Map<Long, App> getApps() throws Exception {
 		if(!toRet.isEmpty()) {			
 			return toRet;
@@ -50,7 +59,7 @@ public class App {
 		if (list.size() == 0) {
 			return toRet;
 		}
-		for (JsonElem e : list) {
+		for (JsonElem e : list) {			
 			System.out.println("ID: "+e.optLong("id"));
 			App a = new App();
 			a.setId(e.optLong("id"));
