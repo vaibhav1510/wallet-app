@@ -9,27 +9,30 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import com.app.wallet.helpers.GetBalanceHelper;
-import com.app.wallet.tp.paytm.PayTmCli;
+import com.app.wallet.helpers.ConnectWallethelper;
 
 /**
- * Servlet implementation class GetBalance
+ * Servlet implementation class ConnectWallet
  */
-@WebServlet(name = "/GetBalance", urlPatterns = "/getbalance")
-public class GetBalance extends HttpServlet {
+@WebServlet(name = "/ConnectWallet", urlPatterns = "/connectwallet")
+public class ConnectWallet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public GetBalance() throws Exception {
+	public ConnectWallet() {
 		super();
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			String email = request.getParameter("email_id");
-			GetBalanceHelper help = new GetBalanceHelper(email);
+			String mobileNumber = request.getParameter("mobile");
+			String state = ConnectWallethelper.generateState(mobileNumber, "PayTm");
 
-			JSONObject resp = help.getBalance();
+			JSONObject resp = new JSONObject();
+			resp.put("email_id", request.getParameter("email"));
+			resp.put("mobileNumber", mobileNumber);
+			resp.put("state", state);
+			
 			System.out.println(resp.toString(2));
 			response.getWriter().write(resp.toString());
 		} catch (Exception e) {
@@ -46,4 +49,5 @@ public class GetBalance extends HttpServlet {
 			throws ServletException, IOException {
 		service(request, response);
 	}
+
 }

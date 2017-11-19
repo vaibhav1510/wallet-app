@@ -48,7 +48,7 @@ public class SignUpAction extends HttpServlet {
 			System.out.println(resp.toString(2));
 			response.getWriter().write(resp.toString());			
 //			response.sendRedirect(resp.toString());
-		}catch (Exception e) {			
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -9,29 +9,35 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import com.app.wallet.helpers.GetBalanceHelper;
-import com.app.wallet.tp.paytm.PayTmCli;
+import com.app.wallet.helpers.ConnectWallethelper;
 
 /**
- * Servlet implementation class GetBalance
+ * Servlet implementation class VerifyOtp
  */
-@WebServlet(name = "/GetBalance", urlPatterns = "/getbalance")
-public class GetBalance extends HttpServlet {
+@WebServlet(name = "/VerifyOtp", urlPatterns = "/verifyotp")
+public class VerifyOtp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public GetBalance() throws Exception {
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public VerifyOtp() {
 		super();
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			String email = request.getParameter("email_id");
-			GetBalanceHelper help = new GetBalanceHelper(email);
+			String mobileNumber = request.getParameter("mobile");
+			String email = request.getParameter("email");
+			String state = request.getParameter("state");
+			String otp = request.getParameter("otp");
+			ConnectWallethelper.getNUpdate(email, mobileNumber, "PayTm", state, otp);
 
-			JSONObject resp = help.getBalance();
-			System.out.println(resp.toString(2));
+			JSONObject resp = new JSONObject();
+			resp.put("message", "Update Successfully");
 			response.getWriter().write(resp.toString());
+			response.sendRedirect("/getbalance");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -46,4 +52,5 @@ public class GetBalance extends HttpServlet {
 			throws ServletException, IOException {
 		service(request, response);
 	}
+
 }
