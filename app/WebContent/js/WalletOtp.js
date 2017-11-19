@@ -41,13 +41,11 @@ $(document).ready(function() {
 						alert(res); // show response from the php script.
 
 						var datatemp = JSON.parse(res);
-						var emailId = datatemp.email_id;
+						var email = datatemp.email;
 						var client_token = datatemp.client_token;
 						var url = datatemp.url;
-						var error = datatemp.error;
 						
-						url = url + "?email=" + emailId + "&client_token="
-								+ client_token;
+						url = url + "?email=" + email + "&client_token="+ client_token;
 
 						if(typeof  error === 'undefined'){
 							window.location.href = url;

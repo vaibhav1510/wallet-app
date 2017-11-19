@@ -37,9 +37,10 @@ public class VerifyOtp extends HttpServlet {
 
 			JSONObject resp = new JSONObject();
 			resp.put("message", "Update Successfully");
+			resp.put("email", email);
+			resp.put("client_token", "client_token");
+			resp.put("url", "http://localhost:8080/app/index.html");
 			response.getWriter().write(resp.toString());
-//			resp.put("url", "http://localhost:8080/app/getbalance");
-			response.sendRedirect("/getbalance");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
