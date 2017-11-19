@@ -32,7 +32,7 @@ public class ConnectWallet extends HttpServlet {
 			resp.put("email_id", request.getParameter("email"));
 			resp.put("mobileNumber", mobileNumber);
 			resp.put("state", state);
-			
+
 			System.out.println(resp.toString(2));
 			response.getWriter().write(resp.toString());
 		} catch (Exception e) {
