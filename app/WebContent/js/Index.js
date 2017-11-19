@@ -104,7 +104,7 @@ function UpdateBalance(res) {
 	var balance = data.data;
 
 	for (var val = 0; val < balance.length; val++) {
-		var phone = balance[0].phone;
+		var phone = balance[val].phone;
 
 		var walletList = balance[val].wallet;
 		var travelList = balance[val].travel;
