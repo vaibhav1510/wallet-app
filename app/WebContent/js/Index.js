@@ -18,6 +18,8 @@ function ReadInputData() {
 
 	temp = parameters[1].split("=");
 	gToken = unescape(temp[1]);
+	
+	
 
 }
 
@@ -113,109 +115,83 @@ function UpdateBalance(res) {
 
 }
 
-$(document)
-		.ready(
-				function() {
-					$("#cuatro")
-							.click(
-									function(e) {
 
-										var url = "http://localhost:8080/app/getbalance";
-										var mobile = "7338867999";
+$(document).ready(function() {
+	$("#cuatro").click(function(e) {
+		
+	    var url= "http://localhost:8080/app/getbalance";
+	    var mobile = "7338867999";
+	    
+	    $.ajax({
+	           type: "POST",
+	           url: url,
+	           data: {email_id: gEmailId, mobile_num:mobile, token:gToken},
+	           success: function(res)
+	           {
+	        	  console.log("SUCCESS");
+				var datatemp = JSON.parse(res);
+				var error = datatemp.error;
+	              //alert(res); // show response from the php script.	
+	                          
+	              UpdateBalance(res);
 
-										$
-												.ajax({
-													type : "POST",
-													url : url,
-													data : {
-														email_id : gEmailId,
-														mobile_num : mobile,
-														token : gToken
-													},
-													success : function(res) {
-														console.log("SUCCESS");
-														// alert(res); // show
-														// response from the php
-														// script.
-
-														UpdateBalance(res);
-														if (error === 'undefined') {
-															window.location.href = url;
-														} else {
-															$("#error")
-																	.show()
-																	.delay(5000)
-																	.fadeOut();
-															$("#error")
-																	.text("");
-														}
-
-													},
-													error : function(jqXHR,
-															textStatus,
-															errorThrown) {
-														var respJSON = ajaxResponseHandlers["defhandler"]
-																.parse(jqXHR.responseText);
-														if (_.has(respJSON,
-																"errors")) {
-															ajaxResponseHandlers["formhandler"]
-																	.error(
-																			jqXHR,
-																			textStatus,
-																			errorThrown);
-														}
-													}
-												});
-
-										// e.preventDefault(); // avoid to
-										// execute the actual submit of the
-										// form.
-									});
-
-				});
-
-$('#t4 > li').click(
-		function() {
-
-			alert("t4");
-			var url = "http://localhost:8080/app/getbalance";
-			var mobile = "7338867999";
-
-			$.ajax({
-				type : "POST",
-				url : url,
-				data : {
-					email_id : gEmailId,
-					mobile_num : mobile,
-					token : gToken
-				},
-				success : function(res) {
-					console.log("SUCCESS");
-
-					alert(res); // show response from the php script.
-					var datatemp = JSON.parse(res);
-					var error = datatemp.error;
-
-					UpdateBalance(res);
-
-					if (error === 'undefined') {
-						window.location.href = url;
-					} else {
-						$("#error").show().delay(5000).fadeOut();
-						$("#error").text("");
-					}
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-					var respJSON = ajaxResponseHandlers["defhandler"]
-							.parse(jqXHR.responseText);
-					if (_.has(respJSON, "errors")) {
-						ajaxResponseHandlers["formhandler"].error(jqXHR,
-								textStatus, errorThrown);
-					}
+				if (error === 'undefined') {
+					window.location.href = url;
+				} else {
+					$("#error").show().delay(5000).fadeOut();
+					$("#error").text("");
 				}
-			});
+	        	 
+	           },
+	           error: function (jqXHR, textStatus, errorThrown) {
+	               var respJSON = ajaxResponseHandlers["defhandler"].parse(jqXHR.responseText);
+	               if (_.has(respJSON, "errors")) {
+	                   ajaxResponseHandlers["formhandler"].error(jqXHR, textStatus, errorThrown);
+	               }
+	           }
+	         });
 
-			e.preventDefault(); // avoid to execute the actual submit of the
-								// form.
+//	    e.preventDefault(); // avoid to execute the actual submit of the form.
+	});
 
-		});
+});
+
+
+$('#t4 > li').click(function() {
+
+	alert("t4");
+	    var url= "http://localhost:8080/app/getbalance";
+	    var mobile = "7338867999";
+	    
+	    $.ajax({
+	           type: "POST",
+	           url: url,
+	           data: {email_id: gEmailId, mobile_num:mobile, token:gToken},
+	           success: function(res)
+	           {
+	        	  console.log("SUCCESS");
+	              alert(res); // show response from the php script.	
+	                          
+	              UpdateBalance(res);
+
+	           },
+	           error: function (jqXHR, textStatus, errorThrown) {
+	               var respJSON = ajaxResponseHandlers["defhandler"].parse(jqXHR.responseText);
+	               if (_.has(respJSON, "errors")) {
+	                   ajaxResponseHandlers["formhandler"].error(jqXHR, textStatus, errorThrown);
+	               }
+	           }
+	         });
+
+	    e.preventDefault(); // avoid to execute the actual submit of the form.
+
+});
+
+
+$('#payTMImg').click(function() {
+
+	//$("#WalletConnect").value = "WalletConnect.html?email="+ gEmailId;
+	window.location.href="WalletConnect.html?email="+ gEmailId;
+	
+	
+});
