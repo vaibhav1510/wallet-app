@@ -27,7 +27,7 @@ parameters.put("MID",PaytmConstants.MID);
 parameters.put("CHANNEL_ID",PaytmConstants.CHANNEL_ID);
 parameters.put("INDUSTRY_TYPE_ID",PaytmConstants.INDUSTRY_TYPE_ID);
 parameters.put("WEBSITE",PaytmConstants.WEBSITE);
-parameters.put("MOBILE_NO","9876543210");
+parameters.put("MOBILE_NO","7777777777");
 parameters.put("EMAIL","test@gmail.com");
 parameters.put("CALLBACK_URL", "http://f3eea6a8.ngrok.io/app/index.html");
 //parameters.put("CALLBACK_URL", "http://localhost:8080/app/pgResponse.jsp");

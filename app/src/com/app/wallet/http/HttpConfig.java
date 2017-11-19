@@ -19,7 +19,7 @@ public class HttpConfig {
     public int connectTimeout;
 
     public int readTimeout;
-
+    
     public AuthenticationScheme authScheme = AuthenticationScheme.BASIC;
 
     public HttpConfig(String username) {

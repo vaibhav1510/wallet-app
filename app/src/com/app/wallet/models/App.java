@@ -22,7 +22,7 @@ public class App {
 	}
 
 	public String getName() {
-		return name;
+		return name;		
 	}
 
 	public void setName(String name) {
@@ -40,7 +40,7 @@ public class App {
 	public static Map<Long, App> toRet = new HashMap<Long, App>();
 	
 	public static Map<Long, App> getApps() throws Exception {
-		if(!toRet.isEmpty()) {
+		if(!toRet.isEmpty()) {			
 			return toRet;
 		}	
 		String sql = "select * from apps";
@@ -51,6 +51,7 @@ public class App {
 			return toRet;
 		}
 		for (JsonElem e : list) {
+			System.out.println("ID: "+e.optLong("id"));
 			App a = new App();
 			a.setId(e.optLong("id"));
 			a.setName(e.str("name"));

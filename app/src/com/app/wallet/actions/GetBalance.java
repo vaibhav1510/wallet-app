@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import com.app.wallet.helpers.GetBalanceHelper;
+import com.app.wallet.tp.paytm.PayTmCli;
 
 /**
  * Servlet implementation class GetBalance
@@ -18,7 +19,7 @@ import com.app.wallet.helpers.GetBalanceHelper;
 public class GetBalance extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public GetBalance() {
+	public GetBalance() throws Exception {
 		super();
 	}
 
@@ -27,9 +28,16 @@ public class GetBalance extends HttpServlet {
 		try {
 			String email = request.getParameter("email_id");
 			GetBalanceHelper help = new GetBalanceHelper(email);
-			
+
 			JSONObject resp = help.getBalance();
 			System.out.println(resp.toString(2));
+			
+			PayTmCli cli = new PayTmCli();
+			String state = cli.requestOtp("7777777777");
+			String accessCode = cli.validateOtp(state, "489871");
+			String amount = cli.getBalance(accessCode);
+			
+			System.out.println(amount);
 			response.getWriter().write(resp.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
