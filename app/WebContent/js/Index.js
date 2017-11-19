@@ -154,6 +154,12 @@ $(document).ready(function() {
 //	    e.preventDefault(); // avoid to execute the actual submit of the form.
 	});
 
+	$('#payTMImg').click(function() {		
+		var url = "http://localhost:8080/app/WalletConnect.html?email="+ gEmailId;
+		window.location.href= url;
+		return false;
+	});	
+
 });
 
 
@@ -188,10 +194,4 @@ $('#t4 > li').click(function() {
 });
 
 
-$('#payTMImg').click(function() {
 
-	//$("#WalletConnect").value = "WalletConnect.html?email="+ gEmailId;
-	window.location.href="WalletConnect.html?email="+ gEmailId;
-	
-	
-});

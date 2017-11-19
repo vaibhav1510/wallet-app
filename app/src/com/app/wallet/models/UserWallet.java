@@ -13,7 +13,7 @@ public class UserWallet {
 	private User user;
 	private App app;
 	private String mobileNum;
-	private Integer balance;
+	private Double balance;
 	private Long id;
 
 	public Long getId() {
@@ -38,7 +38,7 @@ public class UserWallet {
 		uw.setApp(App.getApps().get(e.optLong("app_id")));
 		uw.setUser(u);
 		uw.setId(e.optLong("id"));
-		uw.setBalance(e.integer("balance"));
+		uw.setBalance(Double.parseDouble(e.str("balance")));
 		uw.setMobileNum(e.str("mobile_number"));		
 		return uw;
 	}
@@ -75,7 +75,7 @@ public class UserWallet {
 			UserWallet uw = new UserWallet();
 			uw.setApp(App.getApps().get(e.optLong("app_id")));
 			uw.setUser(u);
-			uw.setBalance(e.integer("balance"));
+			uw.setBalance(Double.parseDouble(e.str("balance")));
 			uw.setMobileNum(e.str("mobile_number"));
 			toRet.add(uw);
 		}
@@ -106,11 +106,11 @@ public class UserWallet {
 		this.mobileNum = mobileNum;
 	}
 
-	public Integer getBalance() {
+	public Double getBalance() {
 		return balance;
 	}
 
-	public void setBalance(Integer balance) {
+	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
 

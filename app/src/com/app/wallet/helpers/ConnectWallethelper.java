@@ -14,6 +14,7 @@ public class ConnectWallethelper {
 	
 	public static String getNUpdate(String email, String mobileNumber, String walletName,String state, String otp) throws Exception{
 		PayTmCli cli = new PayTmCli();
+		System.out.println(state+"+"+otp);
 		String accessCode = cli.validateOtp(state, otp);
 		String amount = cli.getBalance(accessCode);
 		dbInsert(email, mobileNumber, walletName, amount);
@@ -25,9 +26,14 @@ public class ConnectWallethelper {
 		App app = App.getApp(walletName);
 		UserWallet uw =UserWallet.getWallet(u, mobileNumber);
 		if(uw==null) {
+			uw = new UserWallet();
+			uw.setBalance(Double.parseDouble(amount));
+			uw.setUser(u);
+			uw.setApp(app);
+			uw.setMobileNum(mobileNumber);
 			uw.dbInsert();
 		}else {
-			uw.setBalance(Integer.parseInt(amount));
+			uw.setBalance(Double.parseDouble(amount));
 			uw.dbUpdate();
 		}
 	}

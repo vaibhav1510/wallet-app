@@ -9,31 +9,30 @@ Nice and Simple*/
 var emailId = "";
 var mobile = "";
 var otp = "";
+var state = "";
 
-function ShowHideInput() {
-	var parameters = location.search.substring(1).split("&");
-
-	var temp = parameters[0].split("=");
-	gEmailId = unescape(temp[1]);
+$(document).ready(function() {
 
 	$("#otptext").value = "Enter the <strong>One Time Password (OTP) received on </strong>"
-			+ mobile + " to login to Paytm Wallet";
-
-}
-
-function ValidateOTP(email, password) {
-
+		+ mobile + " to login to Paytm Wallet";
+	
+	var parameters = location.search.substring(1).split("&");
+	emailId = unescape(parameters[0].split("=")[1]);
+	mobile=unescape(parameters[1].split("=")[1]);
+	state=unescape(parameters[2].split("=")[1]);
+	
+	
 	$("#WalletotpForm").submit(
 			function(e) {
-
+				otp =$("#OLTP").val();				
 				var url = "http://localhost:8080/app/verifyotp";
 
 				$.ajax({
 					type : "POST",
 					url : url,
 					data : {
-						mobile : email,
-						email : password,
+						email : emailId,
+						mobile : mobile,
 						state : state,
 						otp : otp
 					},
@@ -50,7 +49,7 @@ function ValidateOTP(email, password) {
 						url = url + "?email=" + emailId + "&client_token="
 								+ client_token;
 
-						if(error === 'undefined'){
+						if(typeof  error === 'undefined'){
 							window.location.href = url;
 						} else{
 							$("#error").show().delay(5000).fadeOut();
@@ -70,13 +69,5 @@ function ValidateOTP(email, password) {
 				e.preventDefault(); // avoid to execute the actual submit of the
 				// form.
 			});
-
-}
-
-$('#LoginOTP').click(function() {
-
-	otp = $("OLTP").val();
-	ValidateOTP();
-	// db set mobile
 
 });

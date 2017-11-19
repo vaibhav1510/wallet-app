@@ -273,6 +273,8 @@ public class HttpUtil {
 
 	private static String getAuthValue(HttpConfig config) {
 		switch (config.authScheme) {
+//		case BASIC:
+//			return config.username+":"+config.password;
 		case BASIC:
 			return "Basic " + Base64
 					.encodeBase64String(

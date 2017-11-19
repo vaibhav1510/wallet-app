@@ -7,26 +7,24 @@ This is just the HTML / CSS of it but it uses wordpress's login system.
 Nice and Simple*/
 
 var mobile = "";
-var email = "";
+var email_id = "";
 
-function ShowHideInput()
-{
-	var parameters = location.search.substring(1).split("&");
 
-	var temp = parameters[0].split("=");
-	email = unescape(temp[1]);
-}
+$(document).ready(function() {
 
-function genOTP(email, mobile) {
+		var parameters = location.search.substring(1).split("&");
 
-	$("#WalletloginForm").submit(
-	function(e) {
+		var temp = parameters[0].split("=");
+		email_id = unescape(temp[1]);
+
+	$("#WalletloginForm").submit(function(e) {
+		mobile = $("#MobileNumber").val();
 		var url = "http://localhost:8080/app/connectwallet";
 		$.ajax({
 			type : "POST",
 			url : url,
 			data : {
-				email : email,
+				email : email_id,
 				mobile : mobile
 			},
 			success : function(res) {				
@@ -39,11 +37,11 @@ function genOTP(email, mobile) {
 				var url = datatemp.url;
 				url = url + "?email=" + email + "&mobile="+ mobile+"&state="+state;
 				
-				if(error === 'undefined'){
-					window.location.href = url;
+				if(typeof error === 'undefined'){
+					window.location.href = url;					
 				} else{
 					$("#error").show().delay(5000).fadeOut();
-					$("#error").text("");
+					$("#error").text("");					
 				}				
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
@@ -60,13 +58,5 @@ function genOTP(email, mobile) {
 							// form.
 	});
 
-}
-
-$('#RequestOTP').click(function() {
-
-	mobile = $("#MobileNumber").val();
-	
-	genOTP();
-	
 });
 

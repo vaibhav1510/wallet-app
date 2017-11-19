@@ -36,7 +36,7 @@ public class HttpConfig {
         this.contentType = contentType;
         this.respType = respType;
         this.connectTimeout = Integer.getInteger("com.chargebee.api.http.timeout.connect", 15000);
-        this.readTimeout = Integer.getInteger("com.chargebee.api.http.timeout.read", 60000);
+        this.readTimeout = Integer.getInteger("com.chargebee.api.http.timeout.read", 60000);        
     }
 
     public HttpConfig authenticationScheme(AuthenticationScheme authScheme) {
