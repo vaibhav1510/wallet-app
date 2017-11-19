@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Call Balance</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ <script type="text/javascript" src="js/WalletConnection.js"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+</head>
+<body onload="ShowHideInput()>
+  <div class="login"> <!-- background-color="#fff" -->
+	<h1>Wallet Login</h1>
+    <form method="post" id="WalletotpForm" >
+    	<p id="otptext">Enter the <strong>One Time Password (OTP) received on </strong>7777777777 to login to Paytm Wallet</p>
+        <input id="OLTP" name="p" placeholder="Enter OTP" required="required" />
+        <button id="LoginOTP" type="submit" class="btn btn-primary btn-block btn-large">Login</button>
+        <p id="errorTextOTP"></p>
+    </form>
+</div>
+
+</body>
+</html>
+
