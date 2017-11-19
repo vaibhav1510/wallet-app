@@ -28,7 +28,7 @@ $(document).ready(function() {
 				mobile : mobile
 			},
 			success : function(res) {				
-				alert(res);
+				//alert(res);
 
 				var datatemp = JSON.parse(res);
 				var email = datatemp.email_id;
