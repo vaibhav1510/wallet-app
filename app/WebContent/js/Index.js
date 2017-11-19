@@ -19,6 +19,8 @@ function ReadInputData()
 	
 	temp = parameters[1].split("=");
 	gToken = unescape(temp[1]);
+	
+	
 
 }
 
@@ -185,7 +187,15 @@ $('#t4 > li').click(function() {
 
 	    e.preventDefault(); // avoid to execute the actual submit of the form.
 
+});
 
+
+$('#payTMImg').click(function() {
+
+	//$("#WalletConnect").value = "WalletConnect.html?email="+ gEmailId;
+	window.location.href="WalletConnect.html?email="+ gEmailId;
+	
+	
 });
 
 
