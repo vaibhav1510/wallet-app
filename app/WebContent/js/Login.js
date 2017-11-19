@@ -29,13 +29,19 @@ function genOrderSummary(email, password) {
 						var emailId = datatemp.email_id;
 						var client_token = datatemp.client_token;
 						var url = datatemp.url;
+						var error = datatemp.error;
 						url = url + "?email=" + emailId + "&client_token="
 								+ client_token;
 
 						// url2 = "http://localhost:8080/app/index.html" +
 						// "?email=" + emailId + "&client_token=" +
 						// client_token;
-						window.location.href = url;
+						if(error === 'undefined'){
+							window.location.href = url;
+						} else{
+							$("#error").show().delay(5000).fadeOut();
+							$("#error").text("");
+						}						
 
 					},
 					error : function(jqXHR, textStatus, errorThrown) {

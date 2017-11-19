@@ -38,7 +38,13 @@ function genOTP(email, mobile) {
 				var state = datatemp.state;
 				var url = datatemp.url;
 				url = url + "?email=" + email + "&mobile="+ mobile+"&state="+state;
-				window.location.href = url;
+				
+				if(error === 'undefined'){
+					window.location.href = url;
+				} else{
+					$("#error").show().delay(5000).fadeOut();
+					$("#error").text("");
+				}				
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
 				var respJSON = ajaxResponseHandlers["defhandler"]
